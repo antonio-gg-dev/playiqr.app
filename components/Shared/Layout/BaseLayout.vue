@@ -5,10 +5,6 @@
   >
     <h1 class="layout__title">{{ site.title }}</h1>
     <p>{{ site.description }}</p>
-    <ul>
-      <li><a href="/markdown-examples.html">Markdown Examples</a></li>
-      <li><a href="/api-examples.html">API Examples</a></li>
-    </ul>
   </div>
   <div v-else>
     <a href="/">Home</a>
