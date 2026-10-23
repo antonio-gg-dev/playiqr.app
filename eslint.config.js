@@ -1,18 +1,21 @@
-import js from "@eslint/js";
-import prettierRecommended from "eslint-plugin-prettier/recommended";
-import vue from "eslint-plugin-vue";
-import globals from "globals";
-import typescriptEslint from "typescript-eslint";
-import vueParser from "vue-eslint-parser";
+import js from '@eslint/js'
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
+import vue from 'eslint-plugin-vue'
+import globals from 'globals'
+import typescriptEslint from 'typescript-eslint'
+import vueParser from 'vue-eslint-parser'
 
 export default typescriptEslint.config(
   {
-    ignores: [".vitepress/cache/**", ".vitepress/dist/**"],
+    ignores: [
+      '.vitepress/cache/**',
+      '.vitepress/dist/**',
+    ],
   },
   js.configs.recommended,
   {
     extends: [typescriptEslint.configs.strictTypeChecked],
-    files: ["**/*.{ts,mts,vue}"],
+    files: ['**/*.{ts,mts,vue}'],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -23,18 +26,18 @@ export default typescriptEslint.config(
       },
     },
   },
-  ...vue.configs["flat/recommended"],
+  ...vue.configs['flat/recommended'],
   {
-    files: ["**/*.vue"],
+    files: ['**/*.vue'],
     languageOptions: {
       parser: vueParser,
       parserOptions: {
-        extraFileExtensions: [".vue"],
+        extraFileExtensions: ['.vue'],
         parser: typescriptEslint.parser,
         projectService: true,
-        sourceType: "module",
+        sourceType: 'module',
       },
     },
   },
   prettierRecommended,
-);
+)
