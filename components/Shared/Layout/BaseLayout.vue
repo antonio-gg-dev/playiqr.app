@@ -14,20 +14,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useData } from 'vitepress'
+import { defineComponent } from "vue";
+import { useData } from "vitepress";
 
 export default defineComponent({
-  name: 'Layout',
   setup() {
-    const { site, frontmatter } = useData()
+    const { site, frontmatter } = useData();
 
     return {
       site,
       frontmatter,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">
