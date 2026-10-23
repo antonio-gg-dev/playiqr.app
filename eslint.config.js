@@ -1,18 +1,16 @@
 import js from '@eslint/js'
+import { includeIgnoreFile } from 'eslint/config'
 import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import vue from 'eslint-plugin-vue'
 import globals from 'globals'
 import typescriptEslint from 'typescript-eslint'
 import vueParser from 'vue-eslint-parser'
+import { fileURLToPath, URL } from 'node:url'
 
 export default typescriptEslint.config(
-  {
-    ignores: [
-      '.vitepress/cache/**',
-      '.vitepress/dist/**',
-      'storybook-static/**',
-    ],
-  },
+  includeIgnoreFile(fileURLToPath(new URL('.gitignore', import.meta.url)), {
+    gitignoreResolution: true,
+  }),
   js.configs.recommended,
   {
     extends: [typescriptEslint.configs.strictTypeChecked],
