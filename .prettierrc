@@ -9,5 +9,6 @@
   "tabWidth": 2,
   "singleAttributePerLine": true,
   "printWidth": 120,
+  "proseWrap": "always",
   "multilineArraysWrapThreshold": 1
 }
