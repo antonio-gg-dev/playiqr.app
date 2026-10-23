@@ -7,27 +7,32 @@ type StorybookEntry = {
   type: string
 }
 
-test('matches a screenshot for every Storybook story', async ({ page, request }) => {
-  const response = await request.get('/index.json')
-  expect(response.ok()).toBe(true)
+const response = await fetch('http://127.0.0.1:6200/index.json')
+if (!response.ok) {
+  throw new Error(`Failed to load the Storybook index: ${String(response.status)} ${response.statusText}`)
+}
 
-  const index = (await response.json()) as { entries: Record<string, StorybookEntry> }
-  const stories = Object.values(index.entries).filter((entry) => entry.type === 'story')
-  expect(stories.length).toBeGreaterThan(0)
-  const storybookUrl = new URL(response.url())
+const index = (await response.json()) as { entries: Record<string, StorybookEntry> }
+const stories = Object.values(index.entries).filter((entry) => entry.type === 'story')
+if (stories.length === 0) {
+  throw new Error('The Storybook index does not contain any stories')
+}
+const storybookUrl = new URL(response.url)
 
-  for (const story of stories) {
-    if (!story.importPath || !story.exportName) {
-      throw new Error(`Story ${story.id} is missing its source path or export name`)
-    }
+for (const story of stories) {
+  if (!story.importPath || !story.exportName) {
+    throw new Error(`Story ${story.id} is missing its source path or export name`)
+  }
 
-    const sourcePath = story.importPath.replace(/^\.\//, '')
-    const sourceParts = sourcePath.split('/')
-    const sourceFileName = sourceParts.pop()
-    if (!sourceFileName) {
-      throw new Error(`Story ${story.id} has an invalid source path: ${story.importPath}`)
-    }
+  const exportName = story.exportName
+  const sourcePath = story.importPath.replace(/^\.\//, '')
+  const sourceParts = sourcePath.split('/')
+  const sourceFileName = sourceParts.pop()
+  if (!sourceFileName) {
+    throw new Error(`Story ${story.id} has an invalid source path: ${story.importPath}`)
+  }
 
+  test(`${sourcePath}:${exportName}`, async ({ page }) => {
     const storyPageUrl = new URL('/iframe.html', storybookUrl)
     storyPageUrl.searchParams.set('id', story.id)
     storyPageUrl.searchParams.set('viewMode', 'story')
@@ -36,7 +41,7 @@ test('matches a screenshot for every Storybook story', async ({ page, request })
       ...sourceParts,
       '.snapshots',
       sourceFileName,
-      `${story.exportName}.png`,
+      `${exportName}.png`,
     ])
-  }
-})
+  })
+}
