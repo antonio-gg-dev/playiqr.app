@@ -10,6 +10,7 @@ export default typescriptEslint.config(
     ignores: [
       '.vitepress/cache/**',
       '.vitepress/dist/**',
+      'storybook-static/**',
     ],
   },
   js.configs.recommended,
