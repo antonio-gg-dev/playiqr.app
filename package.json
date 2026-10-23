@@ -10,10 +10,13 @@
     "format:fix": "prettier --write .",
     "all:fix": "npm run lint:fix && npm run format:fix",
     "sa": "vue-tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "setup:e2e": "playwright install chromium"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
     "@vitejs/plugin-vue": "^6.0.10",
     "@vue/test-utils": "^2.5.1",
