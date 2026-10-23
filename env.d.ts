@@ -1,3 +1,5 @@
+declare module '*.scss'
+
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
 
