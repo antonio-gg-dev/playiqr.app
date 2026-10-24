@@ -1,11 +1,11 @@
-import { TrigmaSolver } from '@/lib/Trigma/TrigmaSolver'
+import { Solver } from '@/lib/Trigma/Solver'
 import { Board } from '@/lib/Trigma/Board'
 import { Piece } from '@/lib/Trigma/Piece'
 
-it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
+it('Solver: accepts exactly four distinct board cell IDs', () => {
   expect(
     () =>
-      new TrigmaSolver([
+      new Solver([
         4,
         7,
         11,
@@ -14,7 +14,7 @@ it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
   ).not.toThrow()
   expect(
     () =>
-      new TrigmaSolver([
+      new Solver([
         4,
         7,
         11,
@@ -22,7 +22,7 @@ it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
   ).toThrow(RangeError)
   expect(
     () =>
-      new TrigmaSolver([
+      new Solver([
         4,
         7,
         11,
@@ -32,7 +32,7 @@ it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
   ).toThrow(RangeError)
   expect(
     () =>
-      new TrigmaSolver([
+      new Solver([
         4,
         7,
         11,
@@ -41,7 +41,7 @@ it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
   ).toThrow(RangeError)
   expect(
     () =>
-      new TrigmaSolver([
+      new Solver([
         4,
         7,
         11,
@@ -50,7 +50,7 @@ it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
   ).toThrow(RangeError)
   expect(
     () =>
-      new TrigmaSolver([
+      new Solver([
         4,
         7,
         11,
@@ -59,7 +59,7 @@ it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
   ).toThrow(RangeError)
   expect(
     () =>
-      new TrigmaSolver([
+      new Solver([
         4,
         7,
         11,
@@ -68,9 +68,9 @@ it('TrigmaSolver: accepts exactly four distinct board cell IDs', () => {
   ).toThrow(RangeError)
 })
 
-it('TrigmaSolver: detects solvable and impossible obstacle configurations', () => {
+it('Solver: detects solvable and impossible obstacle configurations', () => {
   expect(
-    new TrigmaSolver([
+    new Solver([
       4,
       7,
       11,
@@ -78,7 +78,7 @@ it('TrigmaSolver: detects solvable and impossible obstacle configurations', () =
     ]).hasSolution(),
   ).toBe(true)
   expect(
-    new TrigmaSolver([
+    new Solver([
       1,
       7,
       14,
@@ -87,14 +87,14 @@ it('TrigmaSolver: detects solvable and impossible obstacle configurations', () =
   ).toBe(false)
 })
 
-it('TrigmaSolver: returns complete placements with distinct pieces and no geometric duplicates', () => {
+it('Solver: returns complete placements with distinct pieces and no geometric duplicates', () => {
   const blocked = [
     0,
     1,
     2,
     3,
   ]
-  const solutions = new TrigmaSolver(blocked).findSolutions(3)
+  const solutions = new Solver(blocked).findSolutions(3)
   const expectedPieces = Piece.all().map((piece) => piece.id)
   const freeCellIds = new Board().cells.map((_, id) => id).filter((id) => !blocked.includes(id))
 
@@ -115,9 +115,9 @@ it('TrigmaSolver: returns complete placements with distinct pieces and no geomet
   expect(signatures.size).toBe(solutions.length)
 })
 
-it('TrigmaSolver: counts zero, one, and multiple solutions with an optional search limit', () => {
+it('Solver: counts zero, one, and multiple solutions with an optional search limit', () => {
   expect(
-    new TrigmaSolver([
+    new Solver([
       1,
       7,
       14,
@@ -125,7 +125,7 @@ it('TrigmaSolver: counts zero, one, and multiple solutions with an optional sear
     ]).countSolutions(),
   ).toBe(0)
   expect(
-    new TrigmaSolver([
+    new Solver([
       4,
       7,
       11,
@@ -133,7 +133,7 @@ it('TrigmaSolver: counts zero, one, and multiple solutions with an optional sear
     ]).countSolutions(),
   ).toBe(1)
 
-  const multiple = new TrigmaSolver([
+  const multiple = new Solver([
     0,
     1,
     2,
@@ -156,8 +156,8 @@ it('TrigmaSolver: counts zero, one, and multiple solutions with an optional sear
   ).toBe(allSolutions.length)
 })
 
-it('TrigmaSolver: rejects invalid solution limits', () => {
-  const solver = new TrigmaSolver([
+it('Solver: rejects invalid solution limits', () => {
+  const solver = new Solver([
     4,
     7,
     11,
@@ -176,14 +176,14 @@ it('TrigmaSolver: rejects invalid solution limits', () => {
   }
 })
 
-it('TrigmaSolver: ignores later input changes and returns deterministic immutable solutions', () => {
+it('Solver: ignores later input changes and returns deterministic immutable solutions', () => {
   const blocked = [
     4,
     7,
     11,
     18,
   ]
-  const solver = new TrigmaSolver(blocked)
+  const solver = new Solver(blocked)
   const originalPieces = Piece.all().map((piece) =>
     piece.orientations().map((orientation) =>
       orientation.cells.map((cell) => [
@@ -200,7 +200,7 @@ it('TrigmaSolver: ignores later input changes and returns deterministic immutabl
   expect(first).toHaveLength(1)
   expect(first).toEqual(solver.findSolutions())
   expect(first).toEqual(
-    new TrigmaSolver([
+    new Solver([
       18,
       11,
       7,

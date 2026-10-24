@@ -3,7 +3,7 @@ import { Piece } from '@/lib/Trigma/Piece'
 import type { PieceId } from '@/lib/Trigma/PieceId'
 import type { Placement } from '@/lib/Trigma/Placement'
 
-export class TrigmaSolver {
+export class Solver {
   private static readonly BLOCKED_CELL_COUNT = 4
 
   readonly #blockedCellIds: readonly number[]
@@ -16,8 +16,8 @@ export class TrigmaSolver {
     const board = new Board()
 
     if (
-      blockedCellIds.length !== TrigmaSolver.BLOCKED_CELL_COUNT ||
-      new Set(blockedCellIds).size !== TrigmaSolver.BLOCKED_CELL_COUNT ||
+      blockedCellIds.length !== Solver.BLOCKED_CELL_COUNT ||
+      new Set(blockedCellIds).size !== Solver.BLOCKED_CELL_COUNT ||
       blockedCellIds.some((id) => !Number.isInteger(id) || id < 0 || id >= board.cells.length)
     ) {
       throw new RangeError('Blocked cells must be four distinct board cell IDs')

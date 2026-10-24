@@ -1,9 +1,9 @@
-import { TrigmaChallengeAnalyzer } from '@/lib/Trigma/TrigmaChallengeAnalyzer'
+import { ChallengeAnalyzer } from '@/lib/Trigma/ChallengeAnalyzer'
 import { BoardSymmetry } from '@/lib/Trigma/BoardSymmetry'
-import { TrigmaSolver } from '@/lib/Trigma/TrigmaSolver'
+import { Solver } from '@/lib/Trigma/Solver'
 
-it('TrigmaChallengeAnalyzer: enumerates exactly one canonical representative per obstacle orbit', () => {
-  const representatives = new TrigmaChallengeAnalyzer().representatives()
+it('ChallengeAnalyzer: enumerates exactly one canonical representative per obstacle orbit', () => {
+  const representatives = new ChallengeAnalyzer().representatives()
 
   expect(representatives).toHaveLength(9990)
   expect(representatives[0]).toEqual([
@@ -15,8 +15,8 @@ it('TrigmaChallengeAnalyzer: enumerates exactly one canonical representative per
   expect(new Set(representatives.map((ids) => ids.join(','))).size).toBe(representatives.length)
 })
 
-it('TrigmaChallengeAnalyzer: symmetry groups partition all 58,905 obstacle configurations', () => {
-  const representatives = new TrigmaChallengeAnalyzer().representatives()
+it('ChallengeAnalyzer: symmetry groups partition all 58,905 obstacle configurations', () => {
+  const representatives = new ChallengeAnalyzer().representatives()
   const symmetry = new BoardSymmetry()
   const allConfigurations = new Set<string>()
   let threeMemberGroups = 0
@@ -43,8 +43,8 @@ it('TrigmaChallengeAnalyzer: symmetry groups partition all 58,905 obstacle confi
   expect(allConfigurations.size).toBe(58905)
 })
 
-it('TrigmaChallengeAnalyzer: reports exact solution counts for impossible, unique, and multiple challenges', () => {
-  const analyzer = new TrigmaChallengeAnalyzer()
+it('ChallengeAnalyzer: reports exact solution counts for impossible, unique, and multiple challenges', () => {
+  const analyzer = new ChallengeAnalyzer()
 
   expect(
     analyzer.analyzeConfiguration([
@@ -79,7 +79,7 @@ it('TrigmaChallengeAnalyzer: reports exact solution counts for impossible, uniqu
   ])
 })
 
-it('TrigmaChallengeAnalyzer: equivalent obstacles have the same exact solution count', () => {
+it('ChallengeAnalyzer: equivalent obstacles have the same exact solution count', () => {
   const symmetry = new BoardSymmetry()
 
   for (const blocked of [
@@ -96,13 +96,13 @@ it('TrigmaChallengeAnalyzer: equivalent obstacles have the same exact solution c
       3,
     ],
   ]) {
-    const counts = symmetry.equivalents(blocked).map((ids) => new TrigmaSolver(ids).countSolutions())
+    const counts = symmetry.equivalents(blocked).map((ids) => new Solver(ids).countSolutions())
     expect(new Set(counts).size).toBe(1)
   }
 })
 
-it('TrigmaChallengeAnalyzer: weights solution categories by symmetry orbit size', () => {
-  const analyzer = new TrigmaChallengeAnalyzer()
+it('ChallengeAnalyzer: weights solution categories by symmetry orbit size', () => {
+  const analyzer = new ChallengeAnalyzer()
   const blocked = [
     [
       1,

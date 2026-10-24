@@ -18,9 +18,9 @@ registerHooks({
   },
 })
 
-const { TrigmaChallengeAnalyzer } = await import('../lib/Trigma/TrigmaChallengeAnalyzer.ts')
-const { TrigmaSolver } = await import('../lib/Trigma/TrigmaSolver.ts')
-const analyzer = new TrigmaChallengeAnalyzer()
+const { ChallengeAnalyzer } = await import('../lib/Trigma/ChallengeAnalyzer.ts')
+const { Solver } = await import('../lib/Trigma/Solver.ts')
+const analyzer = new ChallengeAnalyzer()
 const representatives = analyzer.representatives()
 const sampleSize = 200
 const timings = []
@@ -28,7 +28,7 @@ const timings = []
 for (let index = 0; index < sampleSize; index += 1) {
   const representative = representatives[Math.floor((index * (representatives.length - 1)) / (sampleSize - 1))]
   const started = performance.now()
-  const solver = new TrigmaSolver(representative)
+  const solver = new Solver(representative)
   const constructed = performance.now()
   solver.countSolutions()
   timings.push({ constructorMs: constructed - started, countMs: performance.now() - constructed })

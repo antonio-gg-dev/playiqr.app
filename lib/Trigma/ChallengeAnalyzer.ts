@@ -1,12 +1,12 @@
 import { Board } from '@/lib/Trigma/Board'
 import { BoardSymmetry } from '@/lib/Trigma/BoardSymmetry'
-import { TrigmaSolver } from '@/lib/Trigma/TrigmaSolver'
+import { Solver } from '@/lib/Trigma/Solver'
 
-export class TrigmaChallengeAnalyzer {
+export class ChallengeAnalyzer {
   readonly #symmetry = new BoardSymmetry()
 
   analyze(blockedConfigurations: readonly (readonly number[])[] = this.representatives()) {
-    const groupsByCanonical = new Map<string, ReturnType<TrigmaChallengeAnalyzer['analyzeConfiguration']>>()
+    const groupsByCanonical = new Map<string, ReturnType<ChallengeAnalyzer['analyzeConfiguration']>>()
 
     for (const blockedCellIds of blockedConfigurations) {
       const canonical = this.#symmetry.equivalents(blockedCellIds)[0]
@@ -64,7 +64,7 @@ export class TrigmaChallengeAnalyzer {
     return Object.freeze({
       canonical,
       equivalents,
-      solutionCount: new TrigmaSolver(canonical).countSolutions(),
+      solutionCount: new Solver(canonical).countSolutions(),
     })
   }
 
