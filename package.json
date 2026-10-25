@@ -17,6 +17,7 @@
     "stories": "storybook dev -p 6200 --no-open",
     "stories:build": "storybook build",
     "trigma:analyze": "node --experimental-transform-types scripts/analyze-trigma.mjs",
+    "trigma:difficulty": "node --experimental-transform-types scripts/rank-trigma.mjs",
     "pre-commit": "npm run sa && npm run lint && npm run format && npm run test && npm run test:e2e && npm run build && npm run stories:build",
     "pre-commit:install": "printf '#!/bin/sh\\nnpm run pre-commit\\n' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit",
     "postinstall": "npm run pre-commit:install && npm run setup:e2e"

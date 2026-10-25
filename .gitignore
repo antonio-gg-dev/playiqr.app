@@ -4,3 +4,5 @@ node_modules
 storybook-static/
 test-results/
 trigma-analysis.json
+trigma-difficulty.json
+trigma-blind-trial.json
