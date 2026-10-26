@@ -37,6 +37,7 @@ for (const story of stories) {
     storyPageUrl.searchParams.set('id', story.id)
     storyPageUrl.searchParams.set('viewMode', 'story')
     await page.goto(storyPageUrl.href)
+    await expect(page.locator('#storybook-root > *').first()).toBeVisible()
     await expect(page).toHaveScreenshot([
       ...sourceParts,
       '.snapshots',
