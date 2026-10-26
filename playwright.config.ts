@@ -1,6 +1,17 @@
 import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
+  reporter: [
+    ['list'],
+    [
+      'html',
+      {
+        outputFolder: 'playwright-report',
+        open: process.env.CI === undefined ? 'on-failure' : 'never',
+      },
+    ],
+  ],
+
   projects: [
     {
       name: 'pages',
