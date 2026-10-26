@@ -38,6 +38,9 @@ for (const story of stories) {
     storyPageUrl.searchParams.set('viewMode', 'story')
     await page.goto(storyPageUrl.href)
     await expect(page.locator('#storybook-root > *').first()).toBeVisible()
+    await page.evaluate(async () => {
+      await document.fonts.ready
+    })
     await expect(page).toHaveScreenshot([
       ...sourceParts,
       '.snapshots',
