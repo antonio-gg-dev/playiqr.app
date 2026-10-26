@@ -31,7 +31,7 @@ export default defineComponent({
 <style lang="scss">
 .layout {
   &__title {
-    @apply text-3xl font-bold text-gray-700;
+    @apply font-heading text-3xl font-bold text-gray-700;
   }
 }
 </style>

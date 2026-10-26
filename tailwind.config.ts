@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 export default {
   content: [
@@ -6,6 +7,16 @@ export default {
     './components/**/*.stories.ts',
   ],
   theme: {
+    fontFamily: {
+      heading: [
+        'Lexend Variable',
+        ...defaultTheme.fontFamily.sans,
+      ],
+      sans: [
+        'Atkinson Hyperlegible Next Variable',
+        ...defaultTheme.fontFamily.sans,
+      ],
+    },
     extend: {},
   },
   plugins: [],
