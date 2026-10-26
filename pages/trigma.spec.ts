@@ -15,6 +15,9 @@ test('shows a Trigma challenge from four blocker IDs in the URL', async ({ page 
   ]) {
     await expect(board.locator(`[data-cell-id="${id.toString()}"]`)).toHaveClass(/trigma-board__cell--blocked/)
   }
+  await page.evaluate(async () => {
+    await document.fonts.ready
+  })
   await expect(page).toHaveScreenshot('trigma-challenge.png')
 })
 
@@ -53,6 +56,9 @@ test('keeps the triangular board proportional on a narrow screen', async ({ page
   }
   expect(bounds.width).toBeLessThanOrEqual(320)
   expect(bounds.height / bounds.width).toBeCloseTo(Math.sqrt(3) / 2, 2)
+  await page.evaluate(async () => {
+    await document.fonts.ready
+  })
   await expect(page).toHaveScreenshot('trigma-challenge-mobile.png')
 })
 
@@ -75,5 +81,8 @@ test('explains missing and invalid blocker parameters', async ({ page }) => {
     await expect(page.getByRole('img', { name: /Tablero de Trigma/ })).toHaveCount(0)
   }
 
+  await page.evaluate(async () => {
+    await document.fonts.ready
+  })
   await expect(page).toHaveScreenshot('invalid-trigma-query.png')
 })
