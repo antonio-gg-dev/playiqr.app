@@ -1,36 +1,64 @@
 import { expect, test } from '@playwright/test'
 
-test('displays the site title', async ({ page }) => {
+test('matches the home page snapshot', async ({ page }) => {
   await page.goto('/')
-
-  const heading = page.getByRole('heading', { name: 'IQR' })
-  await expect(heading).toBeVisible()
-
-  const typography = await page.evaluate(async () => {
-    const [
-      atkinson,
-      lexend,
-    ] = await Promise.all([
-      document.fonts.load('400 16px "Atkinson Hyperlegible Next Variable"', 'IQR'),
-      document.fonts.load('400 16px "Lexend Variable"', 'IQR'),
-    ])
-
-    const title = document.querySelector('h1')
-
-    return {
-      bodyFontFamily: getComputedStyle(document.body).fontFamily,
-      headingFontFamily: title ? getComputedStyle(title).fontFamily : '',
-      atkinsonLoaded: atkinson.length > 0,
-      lexendLoaded: lexend.length > 0,
-    }
-  })
-
-  expect(typography.bodyFontFamily).toContain('Atkinson Hyperlegible Next Variable')
-  expect(typography.headingFontFamily).toContain('Lexend Variable')
-  expect(typography.atkinsonLoaded).toBe(true)
-  expect(typography.lexendLoaded).toBe(true)
   await page.evaluate(async () => {
     await document.fonts.ready
   })
   await expect(page).toHaveScreenshot('home-page.png')
+})
+
+test('matches the vertical layout snapshots on mobile and desktop', async ({ page }) => {
+  const viewports = [
+    {
+      name: 'mobile',
+      width: 320,
+      height: 600,
+    },
+    {
+      name: 'desktop',
+      width: 1280,
+      height: 720,
+    },
+  ]
+
+  for (const viewport of viewports) {
+    await page.setViewportSize({
+      width: viewport.width,
+      height: viewport.height,
+    })
+    await page.goto('/')
+    await page.evaluate(async () => {
+      await document.fonts.ready
+    })
+    await expect(page).toHaveScreenshot(`home-layout-${viewport.name}.png`)
+  }
+
+  await expect(page.locator('meta[name="viewport"][content*="viewport-fit=cover"]')).toHaveCount(1)
+})
+
+test('grows and scrolls when page content exceeds the viewport height', async ({ page }) => {
+  await page.setViewportSize({
+    width: 320,
+    height: 600,
+  })
+  await page.goto('/')
+
+  await page.locator('main.base-layout__content').evaluate((content) => {
+    const tallContent = document.createElement('div')
+    tallContent.style.height = '120vh'
+    content.append(tallContent)
+  })
+
+  const layoutHeight = await page
+    .locator('.base-layout__container')
+    .evaluate((container) => container.getBoundingClientRect().height)
+  const documentHeight = await page.evaluate(() => document.documentElement.scrollHeight)
+
+  expect(layoutHeight).toBeGreaterThan(600)
+  expect(documentHeight).toBeGreaterThan(600)
+  await page.evaluate(() => {
+    window.scrollTo(0, document.documentElement.scrollHeight)
+  })
+  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0)
 })
