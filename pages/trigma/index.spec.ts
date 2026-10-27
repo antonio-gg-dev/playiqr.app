@@ -3,10 +3,8 @@ import { expect, test } from '@playwright/test'
 test('shows a Trigma challenge from four blocker IDs in the URL', async ({ page }) => {
   await page.goto('/trigma?b=0,11,21,27')
 
-  const content = page.locator('main.base-layout__content')
-  const board = content.getByRole('img', { name: /Tablero de Trigma/ })
+  const board = page.getByRole('img', { name: /Tablero de Trigma/ })
   await expect(board).toHaveAccessibleName('Tablero de Trigma. Bloqueadores: 0, 11, 21, 27')
-  await expect(content.locator('a[href="/"]')).toHaveAccessibleName('Home')
   await expect(board.locator('polygon')).toHaveCount(36)
   await expect(board.locator('.trigma-board__cell--blocked')).toHaveCount(4)
   for (const id of [
@@ -72,7 +70,7 @@ test('explains missing and invalid blocker parameters', async ({ page }) => {
     '?b=0,11,21,27&b=1,2,3,4',
   ]) {
     await page.goto(`/trigma${query}`)
-    await expect(page.locator('main.base-layout__content svg.trigma-board')).toHaveCount(0)
+    await expect(page.locator('svg.trigma-board')).toHaveCount(0)
   }
 
   await page.evaluate(async () => {

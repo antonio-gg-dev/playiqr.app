@@ -26,7 +26,6 @@ import type { Cell } from '@/lib/Trigma/Cell'
 const TRIANGLE_HEIGHT = Math.sqrt(3) / 2
 
 export default defineComponent({
-  name: 'TrigmaBoard',
   props: {
     blockedCellIds: {
       type: Array as PropType<readonly number[]>,
