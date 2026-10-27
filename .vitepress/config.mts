@@ -7,6 +7,15 @@ export default defineConfig({
   cleanUrls: true,
   title: 'IQR',
   description: 'Open-source 3D-printable logic puzzles with interactive challenges.',
+  head: [
+    [
+      'meta',
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1.0, viewport-fit=cover',
+      },
+    ],
+  ],
 
   vite: {
     css: {
