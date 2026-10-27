@@ -99,7 +99,7 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Test with Playwright
-        run: npm run test:e2e
+        run: npm run e2e
       - name: Upload Playwright diagnostics
         if: always()
         uses: actions/upload-artifact@v7
