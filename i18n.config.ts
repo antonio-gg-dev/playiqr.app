@@ -11,7 +11,11 @@ export function createLocalization() {
     globalInjection: true,
     locale: Language.English,
     fallbackLocale: Language.English,
-    messages: { en, es },
+    messages: {
+      en,
+      es,
+    },
   }
+
   return createI18n<[MessageSchema], Language, false>(options)
 }

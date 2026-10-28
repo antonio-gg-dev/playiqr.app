@@ -6,7 +6,10 @@ export class Preferences {
   public static readonly KEY: InjectionKey<Preferences> = Symbol('IQR preferences')
   public static readonly STORAGE_KEY = 'preferences'
 
-  private readonly state = reactive({ theme: ThemeMode.Auto, language: Language.English })
+  private readonly state = reactive({
+    theme: ThemeMode.Auto,
+    language: Language.English,
+  })
   private browser?: Window
   private media?: MediaQueryList
   private readonly onSystemChange = () => {
@@ -23,8 +26,11 @@ export class Preferences {
 
   public initialize(browser: Window): void {
     this.dispose()
+
     this.browser = browser
+
     const values = this.read()
+
     this.state.theme = Object.values(ThemeMode).find((value) => value === values.theme) ?? ThemeMode.Auto
     this.state.language =
       Object.values(Language).find((value) => value === values.language) ??
@@ -33,6 +39,7 @@ export class Preferences {
       ) ??
       Language.English
     this.media = browser.matchMedia('(prefers-color-scheme: dark)')
+
     this.media.addEventListener('change', this.onSystemChange)
     this.applyTheme()
     this.applyLanguage()
@@ -42,7 +49,9 @@ export class Preferences {
     if (!Object.values(ThemeMode).includes(theme)) {
       throw new Error('Unsupported theme')
     }
+
     this.state.theme = theme
+
     this.persist()
     this.applyTheme()
   }
@@ -51,13 +60,16 @@ export class Preferences {
     if (!Object.values(Language).includes(language)) {
       throw new Error('Unsupported language')
     }
+
     this.state.language = language
+
     this.persist()
     this.applyLanguage()
   }
 
   public dispose(): void {
     this.media?.removeEventListener('change', this.onSystemChange)
+
     this.media = undefined
     this.browser = undefined
   }
@@ -66,7 +78,9 @@ export class Preferences {
     if (!this.browser) {
       return
     }
+
     const dark = this.theme === ThemeMode.Dark || (this.theme === ThemeMode.Auto && this.media?.matches)
+
     this.browser.document.documentElement.dataset.theme = dark ? ThemeMode.Dark : ThemeMode.Light
   }
 
@@ -79,13 +93,17 @@ export class Preferences {
   private read(): { theme?: unknown; language?: unknown } {
     try {
       const stored = this.browser?.localStorage.getItem(Preferences.STORAGE_KEY)
+
       if (stored === null || stored === undefined) {
         return {}
       }
+
       const value: unknown = JSON.parse(stored)
+
       if (typeof value !== 'object' || value === null || Array.isArray(value)) {
         return {}
       }
+
       return {
         theme: 'theme' in value ? value.theme : undefined,
         language: 'language' in value ? value.language : undefined,
@@ -96,7 +114,10 @@ export class Preferences {
   }
 
   private serialize(): string {
-    return JSON.stringify({ theme: this.theme, language: this.language })
+    return JSON.stringify({
+      theme: this.theme,
+      language: this.language,
+    })
   }
 
   private persist(): void {
@@ -104,6 +125,7 @@ export class Preferences {
       if (!this.browser) {
         return
       }
+
       this.browser.localStorage.setItem(Preferences.STORAGE_KEY, this.serialize())
     } catch {
       return
