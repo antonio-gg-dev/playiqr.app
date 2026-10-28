@@ -27,7 +27,9 @@ export class Solver {
     this.#board = board
 
     const pieces = Piece.all()
+
     this.#pieceIds = pieces.map((piece) => piece.id)
+
     const rowsByColumn: Placement[][] = Array.from({ length: board.cells.length + pieces.length }, () => [])
 
     pieces.forEach((piece, index) => {
@@ -37,6 +39,7 @@ export class Solver {
         }
 
         rowsByColumn[board.cells.length + index].push(placement)
+
         for (const cellId of placement.cellIds) {
           rowsByColumn[cellId].push(placement)
         }
@@ -48,6 +51,7 @@ export class Solver {
       ...pieces.map((_, index) => board.cells.length + index),
       ...board.cells.map((_, index) => index).filter((id) => !this.#blockedCellIds.includes(id)),
     ]
+
     Object.freeze(this)
   }
 
@@ -98,6 +102,7 @@ export class Solver {
           column < this.#board.cells.length
             ? occupied[column]
             : usedPieces.has(this.#pieceIds[column - this.#board.cells.length])
+
         if (covered) {
           continue
         }
@@ -105,9 +110,11 @@ export class Solver {
         const available = this.#rowsByColumn[column].filter(
           (placement) => !usedPieces.has(placement.pieceId) && placement.cellIds.every((id) => !occupied[id]),
         )
+
         if (available.length === 0) {
           return
         }
+
         if (bestRows === undefined || available.length < bestRows.length) {
           bestRows = available
         }
@@ -115,13 +122,16 @@ export class Solver {
 
       if (bestRows === undefined) {
         count += 1
+
         onSolution?.(chosen)
+
         return
       }
 
       for (const placement of bestRows) {
         chosen.push(placement)
         usedPieces.add(placement.pieceId)
+
         for (const id of placement.cellIds) {
           occupied[id] = true
         }
@@ -131,6 +141,7 @@ export class Solver {
         for (const id of placement.cellIds) {
           occupied[id] = false
         }
+
         usedPieces.delete(placement.pieceId)
         chosen.pop()
 
@@ -141,6 +152,7 @@ export class Solver {
     }
 
     visit()
+
     return count
   }
 }

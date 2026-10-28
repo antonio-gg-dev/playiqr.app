@@ -94,6 +94,7 @@ it('Solver: returns complete placements with distinct pieces and no geometric du
     2,
     3,
   ]
+
   const solutions = new Solver(blocked).findSolutions(3)
   const expectedPieces = Piece.all().map((piece) => piece.id)
   const freeCellIds = new Board().cells.map((_, id) => id).filter((id) => !blocked.includes(id))
@@ -101,10 +102,12 @@ it('Solver: returns complete placements with distinct pieces and no geometric du
   expect(solutions).toHaveLength(3)
 
   const signatures = new Set<string>()
+
   for (const solution of solutions) {
     expect(solution.map((placement) => placement.pieceId)).toEqual(expectedPieces)
 
     const covered = solution.flatMap((placement) => placement.cellIds)
+
     expect(covered).toHaveLength(freeCellIds.length)
     expect([...covered].sort((left, right) => left - right)).toEqual(freeCellIds)
     expect(new Set(covered).size).toBe(freeCellIds.length)
@@ -112,6 +115,7 @@ it('Solver: returns complete placements with distinct pieces and no geometric du
 
     signatures.add(solution.map((placement) => `${placement.pieceId}:${placement.cellIds.join(',')}`).join('|'))
   }
+
   expect(signatures.size).toBe(solutions.length)
 })
 
@@ -139,11 +143,13 @@ it('Solver: counts zero, one, and multiple solutions with an optional search lim
     2,
     3,
   ])
+
   expect(multiple.countSolutions(2)).toBe(2)
   expect(multiple.findSolutions(2)).toHaveLength(2)
   expect(multiple.findSolutions(3)).toHaveLength(3)
 
   const allSolutions = multiple.findSolutions()
+
   expect(allSolutions.length).toBeGreaterThan(2)
   expect(multiple.findSolutions(2)).toEqual(allSolutions.slice(0, 2))
   expect(multiple.countSolutions()).toBe(allSolutions.length)
@@ -197,6 +203,7 @@ it('Solver: ignores later input changes and returns deterministic immutable solu
   blocked[0] = 0
 
   const first = solver.findSolutions()
+
   expect(first).toHaveLength(1)
   expect(first).toEqual(solver.findSolutions())
   expect(first).toEqual(

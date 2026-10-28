@@ -28,11 +28,24 @@ export class ChallengeAnalyzer {
         return 0
       }),
     )
-    const configurations = { total: 0, impossible: 0, oneSolution: 0, multipleSolutions: 0, solvable: 0 }
-    const challenges = { total: groups.length, impossible: 0, oneSolution: 0, multipleSolutions: 0, solvable: 0 }
+    const configurations = {
+      total: 0,
+      impossible: 0,
+      oneSolution: 0,
+      multipleSolutions: 0,
+      solvable: 0,
+    }
+    const challenges = {
+      total: groups.length,
+      impossible: 0,
+      oneSolution: 0,
+      multipleSolutions: 0,
+      solvable: 0,
+    }
 
     for (const group of groups) {
       const size = group.equivalents.length
+
       configurations.total += size
 
       if (group.solutionCount === 0) {

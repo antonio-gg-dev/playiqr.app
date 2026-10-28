@@ -23,18 +23,22 @@ it('ChallengeAnalyzer: symmetry groups partition all 58,905 obstacle configurati
 
   for (const representative of representatives) {
     const equivalents = symmetry.equivalents(representative)
+
     expect(equivalents[0]).toEqual(representative)
     expect([
       3,
       6,
     ]).toContain(equivalents.length)
+
     if (equivalents.length === 3) {
       threeMemberGroups += 1
     }
 
     for (const ids of equivalents) {
       const key = ids.join(',')
+
       expect(allConfigurations.has(key)).toBe(false)
+
       allConfigurations.add(key)
     }
   }
@@ -69,6 +73,7 @@ it('ChallengeAnalyzer: reports exact solution counts for impossible, unique, and
     2,
     3,
   ])
+
   expect(multiple.solutionCount).toBeGreaterThan(1)
   expect(multiple.equivalents).toHaveLength(3)
   expect(multiple.canonical).toEqual([
@@ -97,6 +102,7 @@ it('ChallengeAnalyzer: equivalent obstacles have the same exact solution count',
     ],
   ]) {
     const counts = symmetry.equivalents(blocked).map((ids) => new Solver(ids).countSolutions())
+
     expect(new Set(counts).size).toBe(1)
   }
 })
@@ -123,10 +129,17 @@ it('ChallengeAnalyzer: weights solution categories by symmetry orbit size', () =
       3,
     ],
   ]
+
   const report = analyzer.analyze(blocked)
 
   expect(report.groups).toHaveLength(3)
-  expect(report.challenges).toEqual({ total: 3, impossible: 1, oneSolution: 1, multipleSolutions: 1, solvable: 2 })
+  expect(report.challenges).toEqual({
+    total: 3,
+    impossible: 1,
+    oneSolution: 1,
+    multipleSolutions: 1,
+    solvable: 2,
+  })
   expect(report.configurations.total).toBe(report.groups.reduce((total, group) => total + group.equivalents.length, 0))
   expect(report.configurations.impossible).toBe(analyzer.analyzeConfiguration(blocked[0]).equivalents.length)
   expect(report.configurations.oneSolution).toBe(analyzer.analyzeConfiguration(blocked[1]).equivalents.length)

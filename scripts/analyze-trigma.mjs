@@ -30,6 +30,7 @@ for (let index = 0; index < sampleSize; index += 1) {
   const started = performance.now()
   const solver = new Solver(representative)
   const constructed = performance.now()
+
   solver.countSolutions()
   timings.push({ constructorMs: constructed - started, countMs: performance.now() - constructed })
 }
@@ -43,17 +44,20 @@ log(`Projected exhaustive time: ${(projectedMs / 1000).toFixed(1)} s`)
 
 if (!process.argv.includes('--sample-only')) {
   const maximumProjectedMs = 10 * 60 * 1000
+
   if (projectedMs > maximumProjectedMs) {
     throw new Error('Projected analysis exceeds ten minutes; reuse piece placements and benchmark again')
   }
 
   const started = performance.now()
   const report = analyzer.analyze(representatives)
+
   if (report.configurations.total !== 58905 || report.challenges.total !== 9990) {
     throw new Error('Analysis did not cover every obstacle configuration exactly once')
   }
 
   const reportPath = resolve(projectRoot, 'trigma-analysis.json')
+
   await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`)
   log(`Exhaustive result: ${(performance.now() - started).toFixed(0)} ms`)
   log(`Configurations: ${JSON.stringify(report.configurations)}`)
