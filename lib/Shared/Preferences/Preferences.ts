@@ -10,6 +10,7 @@ export class Preferences {
     theme: ThemeMode.Auto,
     language: Language.English,
   })
+
   private browser?: Window
   private media?: MediaQueryList
   private readonly onSystemChange = () => {
@@ -90,7 +91,10 @@ export class Preferences {
     }
   }
 
-  private read(): { theme?: unknown; language?: unknown } {
+  private read(): {
+    theme?: unknown
+    language?: unknown
+  } {
     try {
       const stored = this.browser?.localStorage.getItem(Preferences.STORAGE_KEY)
 

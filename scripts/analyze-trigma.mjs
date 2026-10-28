@@ -32,7 +32,10 @@ for (let index = 0; index < sampleSize; index += 1) {
   const constructed = performance.now()
 
   solver.countSolutions()
-  timings.push({ constructorMs: constructed - started, countMs: performance.now() - constructed })
+  timings.push({
+    constructorMs: constructed - started,
+    countMs: performance.now() - constructed,
+  })
 }
 
 const averageMs = timings.reduce((total, timing) => total + timing.constructorMs + timing.countMs, 0) / timings.length

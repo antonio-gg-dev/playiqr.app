@@ -4,11 +4,13 @@ import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [vue()],
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
     },
   },
+
   test: {
     environment: 'jsdom',
     globals: true,

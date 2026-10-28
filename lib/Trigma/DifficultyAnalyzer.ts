@@ -44,6 +44,7 @@ export class DifficultyAnalyzer {
       return id
     }),
   )
+
   private static readonly ROWS: readonly Row[] = Object.freeze(
     DifficultyAnalyzer.PIECES.flatMap((piece, pieceIndex) =>
       piece.placementsOn(DifficultyAnalyzer.BOARD).map((placement) =>

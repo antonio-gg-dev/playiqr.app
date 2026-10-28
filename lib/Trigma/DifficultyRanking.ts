@@ -65,7 +65,13 @@ export class DifficultyRanking {
     const matched: Profile[] = []
 
     for (let pair = 0; pair < DifficultyRanking.MATCHED_PAIR_COUNT; pair += 1) {
-      const bySolutionCount = new Map<number, { first: number; last: number }>()
+      const bySolutionCount = new Map<
+        number,
+        {
+          first: number
+          last: number
+        }
+      >()
 
       this.#ranked.forEach((profile, index) => {
         if (selected.has(profile)) {

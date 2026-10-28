@@ -126,7 +126,11 @@ if (!process.argv.includes('--sample-only')) {
       boardRows.push(' '.repeat(Board.SIDE_LENGTH - row - 1) + cells.join(' '))
     }
 
-    return { code, blockedCellIds, boardRows }
+    return {
+      code,
+      blockedCellIds,
+      boardRows,
+    }
   })
 
   const reportPath = resolve(projectRoot, 'trigma-difficulty.json')
@@ -134,7 +138,18 @@ if (!process.argv.includes('--sample-only')) {
 
   await writeFile(
     reportPath,
-    `${JSON.stringify({ method: { simulationRuns: 32, ranking: 'median backtracks, p90 backtracks, trap rate, median discretionary choices' }, challenges: ranked, candidates }, null, 2)}\n`,
+    `${JSON.stringify(
+      {
+        method: {
+          simulationRuns: 32,
+          ranking: 'median backtracks, p90 backtracks, trap rate, median discretionary choices',
+        },
+        challenges: ranked,
+        candidates,
+      },
+      null,
+      2,
+    )}\n`,
   )
   await writeFile(blindPath, `${JSON.stringify(blind, null, 2)}\n`)
   log(`Difficulty analysis: ${(performance.now() - started).toFixed(0)} ms`)
