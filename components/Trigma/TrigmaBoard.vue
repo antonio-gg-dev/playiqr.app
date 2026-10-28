@@ -3,7 +3,7 @@
     class="trigma-board trigma-board__svg"
     :viewBox="viewBox"
     role="img"
-    :aria-label="`Tablero de Trigma. Bloqueadores: ${blockedCellIds.join(', ')}`"
+    :aria-label="$t('boardDescription', { blockers: blockedCellIds.join(', ') })"
   >
     <polygon
       v-for="(cell, id) in cells"
@@ -32,11 +32,11 @@ export default defineComponent({
       required: true,
     },
   },
+
   data() {
-    return {
-      cells: new Board().cells,
-    }
+    return { cells: new Board().cells }
   },
+
   computed: {
     viewBox(): string {
       return [
@@ -47,6 +47,7 @@ export default defineComponent({
       ].join(' ')
     },
   },
+
   methods: {
     pointsFor(cell: Cell): string {
       return cell

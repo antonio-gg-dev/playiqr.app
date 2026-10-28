@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import TrigmaBoard from '@/components/Trigma/TrigmaBoard.vue'
 
 export default {
-  title: 'Trigma/TrigmaBoard',
   component: TrigmaBoard,
   args: {
     blockedCellIds: [
