@@ -38,7 +38,12 @@ export default defineComponent({
       required: true,
     },
     options: {
-      type: Array as PropType<readonly { value: string; label: string }[]>,
+      type: Array as PropType<
+        readonly {
+          value: string
+          label: string
+        }[]
+      >,
       required: true,
     },
     modelValue: {

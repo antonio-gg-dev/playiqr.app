@@ -1,5 +1,5 @@
 <template>
-  <Settings v-bind="$attrs" />
+  <Settings />
 </template>
 
 <script lang="ts">
@@ -8,6 +8,5 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { Settings },
-  inheritAttrs: false,
 })
 </script>
