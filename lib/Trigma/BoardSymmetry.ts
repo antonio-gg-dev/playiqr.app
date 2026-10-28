@@ -24,6 +24,7 @@ export class BoardSymmetry {
           }
 
           const id = board.cellId(transformed)
+
           if (id === undefined) {
             throw new RangeError('A board symmetry mapped a cell outside the board')
           }
@@ -36,6 +37,7 @@ export class BoardSymmetry {
     }
 
     this.#maps = Object.freeze(maps)
+
     Object.freeze(this)
   }
 
@@ -49,8 +51,10 @@ export class BoardSymmetry {
     }
 
     const configurations = new Map<string, readonly number[]>()
+
     for (const map of this.#maps) {
       const ids = Object.freeze(blockedCellIds.map((id) => map[id]).sort((left, right) => left - right))
+
       configurations.set(ids.join(','), ids)
     }
 

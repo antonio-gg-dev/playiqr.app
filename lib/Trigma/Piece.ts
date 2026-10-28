@@ -64,6 +64,7 @@ export class Piece {
     this.shape = PieceOrientation.fromCells(cells)
 
     const orientations: PieceOrientation[] = []
+
     for (const reflected of [
       false,
       true,
@@ -74,11 +75,13 @@ export class Piece {
         if (!orientations.some((existing) => existing.equals(orientation))) {
           orientations.push(orientation)
         }
+
         orientation = orientation.rotated()
       }
     }
 
     this.#orientations = Object.freeze(orientations)
+
     Object.freeze(this)
   }
 
@@ -103,6 +106,7 @@ export class Piece {
           }
 
           const placement = new Placement(this, board, orientation, da, db)
+
           placements.set(placement.cellIds.join(','), placement)
         }
       }

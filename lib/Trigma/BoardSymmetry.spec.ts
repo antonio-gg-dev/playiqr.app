@@ -47,6 +47,7 @@ it('BoardSymmetry: rejects invalid obstacles and returns immutable configuration
     11,
     18,
   ])
+
   expect(equivalents).toHaveLength(6)
   expect(Object.isFrozen(equivalents)).toBe(true)
   expect(equivalents.every((ids) => Object.isFrozen(ids))).toBe(true)

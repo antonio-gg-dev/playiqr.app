@@ -23,6 +23,7 @@ export class Board {
     }
 
     this.cells = Object.freeze(cells)
+
     Object.freeze(this)
   }
 
