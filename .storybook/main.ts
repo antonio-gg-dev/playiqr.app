@@ -5,24 +5,29 @@ import vue from '@vitejs/plugin-vue'
 
 export default {
   stories: ['../**/*.stories.ts'],
+
   framework: {
     name: '@storybook/vue3-vite',
     options: {
       docgen: 'vue-component-meta',
     },
   },
+
   viteFinal(config) {
     return mergeConfig(config, {
       plugins: [vue()],
+
       resolve: {
         alias: {
           '@': fileURLToPath(new URL('..', import.meta.url)),
         },
       },
+
       css: {
         preprocessorOptions: {
           scss: {
             api: 'modern',
+            additionalData: '@use "@/styles/mixins/dark" as *;',
           },
         },
       },

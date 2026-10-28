@@ -8,6 +8,7 @@ export default defineConfig({
   appearance: false,
   title: 'IQR',
   description: 'Open-source 3D-printable logic puzzles with interactive challenges.',
+
   head: [
     [
       'meta',
@@ -23,6 +24,7 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           api: 'modern',
+          additionalData: '@use "@/styles/mixins/dark" as *;',
         },
       },
     },
