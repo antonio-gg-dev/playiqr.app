@@ -124,7 +124,9 @@ it('Piece: generates only unique rotations and reflections for each free shape',
     expect(orientations.every((orientation) => orientation.cells.length === piece.shape.cells.length)).toBe(true)
 
     for (const other of pieces) {
-      if (piece.id === other.id) continue
+      if (piece.id === other.id) {
+        continue
+      }
       expect(
         orientations.some((orientation) => other.orientations().some((candidate) => orientation.equals(candidate))),
       ).toBe(false)

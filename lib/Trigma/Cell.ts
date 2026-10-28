@@ -6,14 +6,14 @@ type Point = readonly [
 ]
 
 export class Cell {
-  static readonly ROTATION_COUNT = 6
+  public static readonly ROTATION_COUNT = 6
   private static readonly SIDE_VERTEX_COUNT = 2
 
-  readonly a: number
-  readonly b: number
-  readonly direction: CellDirection
+  public readonly a: number
+  public readonly b: number
+  public readonly direction: CellDirection
 
-  constructor(a: number, b: number, direction: CellDirection) {
+  public constructor(a: number, b: number, direction: CellDirection) {
     if (
       !Number.isSafeInteger(a) ||
       !Number.isSafeInteger(b) ||
@@ -32,7 +32,7 @@ export class Cell {
     Object.freeze(this)
   }
 
-  vertices(): readonly [
+  public vertices(): readonly [
     Point,
     Point,
     Point,
@@ -70,11 +70,11 @@ export class Cell {
         ]
   }
 
-  equals(other: Cell): boolean {
+  public equals(other: Cell): boolean {
     return this.a === other.a && this.b === other.b && this.direction === other.direction
   }
 
-  sharesSideWith(other: Cell): boolean {
+  public sharesSideWith(other: Cell): boolean {
     if (this.equals(other)) {
       return false
     }
@@ -97,7 +97,7 @@ export class Cell {
     )
   }
 
-  translated(da: number, db: number): Cell {
+  public translated(da: number, db: number): Cell {
     if (!Number.isSafeInteger(da) || !Number.isSafeInteger(db)) {
       throw new RangeError('Cell translation must use safe integers')
     }
@@ -105,7 +105,7 @@ export class Cell {
     return new Cell(this.a + da, this.b + db, this.direction)
   }
 
-  rotated(): Cell {
+  public rotated(): Cell {
     return Cell.fromVertices(
       this.vertices().map(
         ([
@@ -120,7 +120,7 @@ export class Cell {
     )
   }
 
-  reflected(): Cell {
+  public reflected(): Cell {
     return Cell.fromVertices(
       this.vertices().map(
         ([

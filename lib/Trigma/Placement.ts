@@ -4,10 +4,10 @@ import type { PieceId } from '@/lib/Trigma/PieceId'
 import type { PieceOrientation } from '@/lib/Trigma/PieceOrientation'
 
 export class Placement {
-  readonly pieceId: PieceId
-  readonly cellIds: readonly number[]
+  public readonly pieceId: PieceId
+  public readonly cellIds: readonly number[]
 
-  constructor(piece: Piece, board: Board, orientation: PieceOrientation, da: number, db: number) {
+  public constructor(piece: Piece, board: Board, orientation: PieceOrientation, da: number, db: number) {
     if (!Number.isSafeInteger(da) || !Number.isSafeInteger(db)) {
       throw new RangeError('Placement offsets must be safe integers')
     }

@@ -4,14 +4,14 @@ export class PieceOrientation {
   private static readonly TETRIAMOND_SIZE = 4
   private static readonly PENTIAMOND_SIZE = 5
 
-  readonly cells: readonly Cell[]
+  public readonly cells: readonly Cell[]
 
   private constructor(cells: readonly Cell[]) {
     this.cells = Object.freeze([...cells])
     Object.freeze(this)
   }
 
-  static fromCells(cells: readonly Cell[]): PieceOrientation {
+  public static fromCells(cells: readonly Cell[]): PieceOrientation {
     if (cells.length !== PieceOrientation.TETRIAMOND_SIZE && cells.length !== PieceOrientation.PENTIAMOND_SIZE) {
       throw new RangeError('A piece orientation must contain four or five cells')
     }
@@ -55,19 +55,19 @@ export class PieceOrientation {
     return new PieceOrientation(normalized)
   }
 
-  rotated(): PieceOrientation {
+  public rotated(): PieceOrientation {
     return PieceOrientation.fromCells(this.cells.map((cell) => cell.rotated()))
   }
 
-  reflected(): PieceOrientation {
+  public reflected(): PieceOrientation {
     return PieceOrientation.fromCells(this.cells.map((cell) => cell.reflected()))
   }
 
-  translatedCells(da: number, db: number): readonly Cell[] {
+  public translatedCells(da: number, db: number): readonly Cell[] {
     return Object.freeze(this.cells.map((cell) => cell.translated(da, db)))
   }
 
-  equals(other: PieceOrientation): boolean {
+  public equals(other: PieceOrientation): boolean {
     return (
       this.cells.length === other.cells.length && this.cells.every((cell, index) => cell.equals(other.cells[index]))
     )

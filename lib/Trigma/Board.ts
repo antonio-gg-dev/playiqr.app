@@ -2,12 +2,12 @@ import { CellDirection } from '@/lib/Trigma/CellDirection'
 import { Cell } from '@/lib/Trigma/Cell'
 
 export class Board {
-  static readonly SIDE_LENGTH = 6
+  public static readonly SIDE_LENGTH = 6
 
-  readonly cells: readonly Cell[]
+  public readonly cells: readonly Cell[]
   readonly #cellIds = new Map<string, number>()
 
-  constructor() {
+  public constructor() {
     const cells: Cell[] = []
 
     for (let row = 0; row < Board.SIDE_LENGTH; row += 1) {
@@ -26,7 +26,7 @@ export class Board {
     Object.freeze(this)
   }
 
-  cellAt(id: number): Cell {
+  public cellAt(id: number): Cell {
     if (!Number.isInteger(id) || id < 0 || id >= this.cells.length) {
       throw new RangeError('Cell ID is outside the board')
     }
@@ -34,15 +34,15 @@ export class Board {
     return this.cells[id]
   }
 
-  cellId(cell: Cell): number | undefined {
+  public cellId(cell: Cell): number | undefined {
     return this.#cellIds.get(Board.key(cell))
   }
 
-  contains(cell: Cell): boolean {
+  public contains(cell: Cell): boolean {
     return this.cellId(cell) !== undefined
   }
 
-  neighbors(cell: Cell): readonly Cell[] {
+  public neighbors(cell: Cell): readonly Cell[] {
     if (!this.contains(cell)) {
       throw new RangeError('Cell is outside the board')
     }

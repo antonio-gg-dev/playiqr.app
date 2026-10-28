@@ -6,8 +6,8 @@ import { PieceOrientation } from '@/lib/Trigma/PieceOrientation'
 import { Placement } from '@/lib/Trigma/Placement'
 
 export class Piece {
-  readonly id: PieceId
-  readonly shape: PieceOrientation
+  public readonly id: PieceId
+  public readonly shape: PieceOrientation
   readonly #orientations: readonly PieceOrientation[]
 
   private static readonly pieces: readonly Piece[] = Object.freeze([
@@ -82,15 +82,15 @@ export class Piece {
     Object.freeze(this)
   }
 
-  static all(): readonly Piece[] {
+  public static all(): readonly Piece[] {
     return Piece.pieces
   }
 
-  orientations(): readonly PieceOrientation[] {
+  public orientations(): readonly PieceOrientation[] {
     return this.#orientations
   }
 
-  placementsOn(board: Board): readonly Placement[] {
+  public placementsOn(board: Board): readonly Placement[] {
     const placements = new Map<string, Placement>()
     const maxA = Math.max(...board.cells.map((cell) => cell.a))
     const maxB = Math.max(...board.cells.map((cell) => cell.b))
