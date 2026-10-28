@@ -11,7 +11,10 @@ setup((app) => {
 })
 
 export default {
-  initialGlobals: { theme: ThemeMode.Light, language: Language.English },
+  initialGlobals: {
+    theme: ThemeMode.Light,
+    language: Language.English,
+  },
   decorators: [
     (story, context) => {
       document.documentElement.dataset.theme =
@@ -21,6 +24,7 @@ export default {
         beforeCreate() {
           this.$i18n.locale = context.globals.language === Language.Spanish ? Language.Spanish : Language.English
         },
+
         template: '<story />',
       })
 

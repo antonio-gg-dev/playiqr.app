@@ -6,6 +6,7 @@ export default {
     './components/**/*.vue',
     './components/**/*.stories.ts',
   ],
+
   theme: {
     fontFamily: {
       heading: [
@@ -19,5 +20,6 @@ export default {
     },
     extend: {},
   },
+
   plugins: [],
 } satisfies Config

@@ -11,12 +11,16 @@ import '@/styles/index.scss'
 
 const Layout = defineComponent({
   data() {
-    return { preferences: use(Preferences.KEY), router: useRouter() }
+    return {
+      preferences: use(Preferences.KEY),
+      router: useRouter(),
+    }
   },
 
   watch: {
     'preferences.language': {
       immediate: true,
+
       handler(language: Language) {
         this.$i18n.locale = language
       },
