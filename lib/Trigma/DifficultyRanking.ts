@@ -10,6 +10,7 @@ export class DifficultyRanking {
 
   public constructor(profiles: readonly Profile[]) {
     const keys = profiles.map((profile) => profile.blockedCellIds.join(','))
+
     if (new Set(keys).size !== keys.length) {
       throw new RangeError('Difficulty profiles must represent distinct challenges')
     }
@@ -29,6 +30,7 @@ export class DifficultyRanking {
         )
         .sort((left, right) => DifficultyRanking.compare(left, right)),
     )
+
     Object.freeze(this)
   }
 
@@ -49,6 +51,7 @@ export class DifficultyRanking {
 
   public candidates(): readonly Profile[] {
     const required = DifficultyRanking.EXTREME_COUNT * 2 + DifficultyRanking.MATCHED_PAIR_COUNT * 2
+
     if (this.#ranked.length < required) {
       throw new RangeError('At least twelve difficulty profiles are required')
     }
@@ -63,16 +66,20 @@ export class DifficultyRanking {
 
     for (let pair = 0; pair < DifficultyRanking.MATCHED_PAIR_COUNT; pair += 1) {
       const bySolutionCount = new Map<number, { first: number; last: number }>()
+
       this.#ranked.forEach((profile, index) => {
         if (selected.has(profile)) {
           return
         }
+
         const existing = bySolutionCount.get(profile.solutionCount)
+
         bySolutionCount.set(profile.solutionCount, {
           first: existing?.first ?? index,
           last: index,
         })
       })
+
       const widest = [...bySolutionCount.values()]
         .filter(({ first, last }) => first !== last)
         .sort((left, right) => right.last - right.first - (left.last - left.first) || left.first - right.first)
@@ -81,8 +88,10 @@ export class DifficultyRanking {
       if (widest === undefined) {
         throw new RangeError('Two matched solution-count pairs are unavailable')
       }
+
       const low = this.#ranked[widest.first]
       const high = this.#ranked[widest.last]
+
       matched.push(low, high)
       selected.add(low)
       selected.add(high)
@@ -111,6 +120,7 @@ export class DifficultyRanking {
         return left[index] - right[index]
       }
     }
+
     return 0
   }
 }

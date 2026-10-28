@@ -36,9 +36,11 @@ export class DifficultyAnalyzer {
   private static readonly NEIGHBORS = DifficultyAnalyzer.BOARD.cells.map((cell) =>
     DifficultyAnalyzer.BOARD.neighbors(cell).map((neighbor) => {
       const id = DifficultyAnalyzer.BOARD.cellId(neighbor)
+
       if (id === undefined) {
         throw new RangeError('A board neighbor must have a cell ID')
       }
+
       return id
     }),
   )
@@ -66,6 +68,7 @@ export class DifficultyAnalyzer {
     this.#blockedCellIds = Object.freeze([...blockedCellIds].sort((left, right) => left - right))
     this.#blockedMask = DifficultyAnalyzer.cellMask(this.#blockedCellIds)
     this.#rows = Object.freeze(DifficultyAnalyzer.ROWS.filter((row) => (row.mask & this.#blockedMask) === 0n))
+
     Object.freeze(this)
   }
 
@@ -75,6 +78,7 @@ export class DifficultyAnalyzer {
     }
 
     const solutions = this.#solver.findSolutions()
+
     if (solutions.length === 0) {
       throw new RangeError('Challenge must have at least one solution')
     }
@@ -124,6 +128,7 @@ export class DifficultyAnalyzer {
     const random = (): number => {
       randomState =
         (Math.imul(randomState, DifficultyAnalyzer.RANDOM_MULTIPLIER) + DifficultyAnalyzer.RANDOM_INCREMENT) >>> 0
+
       return randomState / DifficultyAnalyzer.RANDOM_RANGE
     }
     const trace: Trace = {
@@ -141,6 +146,7 @@ export class DifficultyAnalyzer {
       }
 
       const state = this.options(occupied, usedPieces)
+
       if (state.impossible) {
         return false
       }
@@ -148,11 +154,14 @@ export class DifficultyAnalyzer {
       const forced =
         state.byCell.find((options, id) => (occupied & (1n << BigInt(id))) === 0n && options.length === 1)?.[0] ??
         state.byPiece.find((options, index) => (usedPieces & (1 << index)) === 0 && options.length === 1)?.[0]
+
       if (forced !== undefined) {
         trace.forcedPlacements += 1
+
         if (trace.discretionaryChoices === 0) {
           trace.forcedBeforeFirstChoice += 1
         }
+
         return visit(occupied | forced.mask, usedPieces | (1 << forced.pieceIndex), [
           ...chosen,
           forced.key,
@@ -170,6 +179,7 @@ export class DifficultyAnalyzer {
       const selectedCell = cells[Math.floor(random() * cells.length)]
       const alternatives = state.byCell[selectedCell]
       const compatible = solutions.filter((solution) => chosen.every((key) => solution.has(key)))
+
       if (compatible.length > 0) {
         trace.inspectedAlternatives += alternatives.length
         trace.deceptiveAlternatives += alternatives.filter(
@@ -180,6 +190,7 @@ export class DifficultyAnalyzer {
       const ordered = alternatives
         .map((row) => {
           const next = this.options(occupied | row.mask, usedPieces | (1 << row.pieceIndex))
+
           return {
             row,
             viable: !next.impossible,
@@ -194,6 +205,7 @@ export class DifficultyAnalyzer {
 
       for (const { row } of ordered) {
         trace.discretionaryChoices += 1
+
         if (
           visit(occupied | row.mask, usedPieces | (1 << row.pieceIndex), [
             ...chosen,
@@ -202,6 +214,7 @@ export class DifficultyAnalyzer {
         ) {
           return true
         }
+
         trace.backtracks += 1
       }
 
@@ -211,6 +224,7 @@ export class DifficultyAnalyzer {
     if (!visit(this.#blockedMask, 0, [])) {
       throw new Error('Simulation failed to find a known solution')
     }
+
     return trace
   }
 
@@ -220,6 +234,7 @@ export class DifficultyAnalyzer {
       usedPieces,
     ].join(':')
     const cached = this.#optionsCache.get(key)
+
     if (cached !== undefined) {
       return cached
     }
@@ -231,7 +246,9 @@ export class DifficultyAnalyzer {
       if ((usedPieces & (1 << row.pieceIndex)) !== 0 || (occupied & row.mask) !== 0n) {
         continue
       }
+
       byPiece[row.pieceIndex].push(row)
+
       for (const id of row.cellIds) {
         byCell[id].push(row)
       }
@@ -241,8 +258,14 @@ export class DifficultyAnalyzer {
       byCell.some((options, id) => (occupied & (1n << BigInt(id))) === 0n && options.length === 0) ||
       byPiece.some((options, index) => (usedPieces & (1 << index)) === 0 && options.length === 0) ||
       !this.regionsFit(this.regionSizes(occupied), usedPieces)
-    const result = { byCell, byPiece, impossible }
+    const result = {
+      byCell,
+      byPiece,
+      impossible,
+    }
+
     this.#optionsCache.set(key, result)
+
     return result
   }
 
@@ -256,11 +279,16 @@ export class DifficultyAnalyzer {
       }
 
       const pending = [id]
+
       seen.add(id)
+
       let size = 0
+
       for (let next = 0; next < pending.length; next += 1) {
         const current = pending[next]
+
         size += 1
+
         for (const neighbor of DifficultyAnalyzer.NEIGHBORS[current]) {
           if ((occupied & (1n << BigInt(neighbor))) === 0n && !seen.has(neighbor)) {
             seen.add(neighbor)
@@ -268,6 +296,7 @@ export class DifficultyAnalyzer {
           }
         }
       }
+
       sizes.push(size)
     }
 
@@ -284,16 +313,21 @@ export class DifficultyAnalyzer {
       if (pieceIndex === remaining.length) {
         return filled.every((count, index) => count === sizes[index])
       }
+
       for (let region = 0; region < sizes.length; region += 1) {
         if (filled[region] + remaining[pieceIndex] > sizes[region]) {
           continue
         }
+
         filled[region] += remaining[pieceIndex]
+
         if (assign(pieceIndex + 1)) {
           return true
         }
+
         filled[region] -= remaining[pieceIndex]
       }
+
       return false
     }
 
@@ -314,11 +348,13 @@ export class DifficultyAnalyzer {
   private static median(values: readonly number[]): number {
     const sorted = [...values].sort((left, right) => left - right)
     const middle = Math.floor(sorted.length / 2)
+
     return sorted.length % 2 === 0 ? (sorted[middle - 1] + sorted[middle]) / 2 : sorted[middle]
   }
 
   private static percentile90(values: readonly number[]): number {
     const sorted = [...values].sort((left, right) => left - right)
+
     return sorted[Math.ceil(0.9 * sorted.length) - 1]
   }
 }

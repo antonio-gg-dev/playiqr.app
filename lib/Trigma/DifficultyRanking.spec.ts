@@ -23,6 +23,7 @@ it('DifficultyRanking: orders profiles and picks twelve distinct candidates with
       percentile90Backtracks: index,
     },
   }))
+
   const ranking = new DifficultyRanking([...profiles].reverse())
   const ranked = ranking.ranked()
   const candidates = ranking.candidates()

@@ -8,6 +8,7 @@ it('DifficultyAnalyzer: reports repeatable local restrictions and solution count
     11,
     18,
   ]
+
   const first = new DifficultyAnalyzer(blocked).analyze(4)
   const second = new DifficultyAnalyzer(blocked).analyze(4)
 
@@ -70,6 +71,7 @@ it('DifficultyAnalyzer: preserves geometric restrictions across equivalent obsta
     11,
     18,
   ])
+
   const profiles = equivalents.map((blocked) => new DifficultyAnalyzer(blocked).analyze(1))
 
   expect(new Set(profiles.map((profile) => profile.solutionCount))).toEqual(new Set([1]))

@@ -13,6 +13,7 @@ registerHooks({
     if (specifier.startsWith('@/')) {
       return nextResolve(pathToFileURL(resolve(projectRoot, `${specifier.slice(2)}.ts`)).href, context)
     }
+
     return nextResolve(specifier, context)
   },
 })
@@ -35,9 +36,11 @@ const sampleChallenges = [
   ],
 ]
 const sampleStart = performance.now()
+
 for (const blocked of sampleChallenges) {
   new DifficultyAnalyzer(blocked).analyze()
 }
+
 log(
   `Benchmark: ${sampleChallenges.length} known solvable challenges in ${(performance.now() - sampleStart).toFixed(0)} ms`,
 )
@@ -46,6 +49,7 @@ if (!process.argv.includes('--sample-only')) {
   const sourcePath = resolve(projectRoot, 'trigma-analysis.json')
   const source = JSON.parse(await readFile(sourcePath, 'utf8'))
   const groups = source.groups.filter((group) => group.solutionCount > 0)
+
   if (source.challenges.solvable !== 4180 || groups.length !== 4180) {
     throw new Error('The exhaustive Trigma report must contain exactly 4,180 solvable challenges')
   }
@@ -56,18 +60,23 @@ if (!process.argv.includes('--sample-only')) {
     (_, index) => groups[Math.floor((index * (groups.length - 1)) / (benchmarkCount - 1))],
   )
   const benchmarkStart = performance.now()
+
   for (const group of benchmarkGroups) {
     new DifficultyAnalyzer(group.canonical).analyze()
   }
+
   const projectedSeconds = ((performance.now() - benchmarkStart) * groups.length) / benchmarkCount / 1000
+
   log(`Projected full difficulty analysis: ${projectedSeconds.toFixed(1)} s`)
 
   const started = performance.now()
   const profiles = groups.map((group) => {
     const profile = new DifficultyAnalyzer(group.canonical).analyze()
+
     if (profile.solutionCount !== group.solutionCount) {
       throw new Error(`Solution count changed for challenge ${group.canonical.join(',')}`)
     }
+
     return profile
   })
   const ranking = new DifficultyRanking(profiles)
@@ -104,19 +113,25 @@ if (!process.argv.includes('--sample-only')) {
   const blind = candidates.map(({ code, blockedCellIds }) => {
     const boardRows = []
     let cellId = 0
+
     for (let row = 0; row < Board.SIDE_LENGTH; row += 1) {
       const cells = []
+
       for (let column = 0; column < 2 * row + 1; column += 1) {
         cells.push(blockedCellIds.includes(cellId) ? '#' : '.')
+
         cellId += 1
       }
+
       boardRows.push(' '.repeat(Board.SIDE_LENGTH - row - 1) + cells.join(' '))
     }
+
     return { code, blockedCellIds, boardRows }
   })
 
   const reportPath = resolve(projectRoot, 'trigma-difficulty.json')
   const blindPath = resolve(projectRoot, 'trigma-blind-trial.json')
+
   await writeFile(
     reportPath,
     `${JSON.stringify({ method: { simulationRuns: 32, ranking: 'median backtracks, p90 backtracks, trap rate, median discretionary choices' }, challenges: ranked, candidates }, null, 2)}\n`,
