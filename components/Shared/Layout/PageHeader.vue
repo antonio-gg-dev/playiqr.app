@@ -11,7 +11,9 @@
         aria-hidden="true"
       />
     </a>
-    <h1 class="page-header__title">{{ title }}</h1>
+    <h1 class="page-header__title">
+      {{ title }}
+    </h1>
   </header>
 </template>
 
@@ -21,10 +23,20 @@ import HomeIcon from '@/components/Shared/Icons/HomeIcon.vue'
 
 export default defineComponent({
   components: { HomeIcon },
+
   props: {
-    title: { type: String, required: true },
-    backHref: { type: String, default: undefined },
-    backLabel: { type: String, default: '' },
+    title: {
+      type: String,
+      required: true,
+    },
+    backHref: {
+      type: String,
+      default: undefined,
+    },
+    backLabel: {
+      type: String,
+      default: '',
+    },
   },
 })
 </script>
@@ -44,7 +56,8 @@ export default defineComponent({
 
     &:hover {
       @apply bg-gray-200;
-      html[data-theme='dark'] & {
+
+      @include dark {
         @apply bg-gray-800;
       }
     }
