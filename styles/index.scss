@@ -5,7 +5,18 @@
 
 html,
 body {
-  @apply font-sans;
+  @apply bg-gray-50 font-sans text-gray-950;
+  color-scheme: light;
+
+  &[data-theme='dark'] {
+    @apply bg-gray-950 text-gray-100;
+    color-scheme: dark;
+  }
+
+  @include dark {
+    @apply bg-gray-950 text-gray-100;
+    color-scheme: dark;
+  }
 }
 
 h1,
