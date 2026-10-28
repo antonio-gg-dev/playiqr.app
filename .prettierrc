@@ -10,5 +10,6 @@
   "singleAttributePerLine": true,
   "printWidth": 120,
   "proseWrap": "always",
+  "objectWrap": "preserve",
   "multilineArraysWrapThreshold": 1
 }

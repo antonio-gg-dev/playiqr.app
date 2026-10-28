@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 import js from '@eslint/js'
+import stylistic from '@stylistic/eslint-plugin'
 import { includeIgnoreFile } from 'eslint/config'
 import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import vue from 'eslint-plugin-vue'
@@ -72,4 +73,22 @@ export default typescriptEslint.config(
   },
 
   prettierRecommended,
+
+  {
+    files: ['**/*.{ts,mts,vue}'],
+    plugins: {
+      '@stylistic': stylistic,
+    },
+    rules: {
+      '@stylistic/object-curly-newline': [
+        'error',
+        {
+          ObjectExpression: {
+            minProperties: 2,
+            consistent: true,
+          },
+        },
+      ],
+    },
+  },
 )
