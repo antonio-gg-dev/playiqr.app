@@ -1,0 +1,16 @@
+{
+  "options": "Opciones",
+  "levels": "Niveles",
+  "dailyChallenge": "Reto diario",
+  "returnToMenu": "Volver al menú",
+  "allPuzzles": "Todos los puzles",
+  "theme": "Tema",
+  "automatic": "Automático",
+  "light": "Claro",
+  "dark": "Oscuro",
+  "language": "Idioma",
+  "spanish": "Español",
+  "english": "English",
+  "invalidBlockers": "El parámetro b debe contener cuatro IDs distintos del 0 al {lastCellId} separados por comas.",
+  "boardDescription": "Tablero de Trigma. Bloqueadores: {blockers}"
+}

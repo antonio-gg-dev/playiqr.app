@@ -1,0 +1,16 @@
+{
+  "options": "Options",
+  "levels": "Levels",
+  "dailyChallenge": "Daily challenge",
+  "returnToMenu": "Back to menu",
+  "allPuzzles": "All puzzles",
+  "theme": "Theme",
+  "automatic": "Automatic",
+  "light": "Light",
+  "dark": "Dark",
+  "language": "Language",
+  "spanish": "Español",
+  "english": "English",
+  "invalidBlockers": "The b parameter must contain four distinct IDs from 0 to {lastCellId}, separated by commas.",
+  "boardDescription": "Trigma board. Blockers: {blockers}"
+}
