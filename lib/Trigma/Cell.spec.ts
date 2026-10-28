@@ -50,6 +50,7 @@ it('Cell: returns new cells for translations, six rotations, and two reflections
   let rotated = cell
 
   expect(Cell.ROTATION_COUNT).toBe(6)
+
   for (let turn = 0; turn < Cell.ROTATION_COUNT; turn += 1) {
     rotated = rotated.rotated()
   }

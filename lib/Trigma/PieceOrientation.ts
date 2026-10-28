@@ -8,6 +8,7 @@ export class PieceOrientation {
 
   private constructor(cells: readonly Cell[]) {
     this.cells = Object.freeze([...cells])
+
     Object.freeze(this)
   }
 
@@ -25,6 +26,7 @@ export class PieceOrientation {
         ].join(','),
       ),
     )
+
     if (keys.size !== cells.length) {
       throw new RangeError('A piece orientation cannot repeat a cell')
     }

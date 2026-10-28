@@ -11,6 +11,7 @@ const t1 = [
 
 it('PieceOrientation: normalizes translation and input order without changing the shape', () => {
   const original = PieceOrientation.fromCells(t1)
+
   const moved = PieceOrientation.fromCells(t1.map((cell) => cell.translated(-4, 3)).reverse())
 
   expect(original.equals(moved)).toBe(true)
@@ -24,6 +25,7 @@ it('PieceOrientation: preserves size and connectivity through rotations and refl
 
   for (let turn = 0; turn < Cell.ROTATION_COUNT; turn += 1) {
     rotated = rotated.rotated()
+
     expect(rotated.cells).toHaveLength(4)
   }
 

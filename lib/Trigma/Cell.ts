@@ -22,6 +22,7 @@ export class Cell {
     ) {
       throw new RangeError('Cell coordinates must be safe integers')
     }
+
     if (!Object.values(CellDirection).includes(direction)) {
       throw new RangeError('Cell direction must be up or down')
     }
@@ -29,6 +30,7 @@ export class Cell {
     this.a = a
     this.b = b
     this.direction = direction
+
     Object.freeze(this)
   }
 
@@ -177,6 +179,7 @@ export class Cell {
     ) {
       return new Cell(a, b, CellDirection.Up)
     }
+
     if (
       matches([
         [
