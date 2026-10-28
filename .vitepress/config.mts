@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   srcDir: 'pages',
   cleanUrls: true,
+  appearance: false,
   title: 'IQR',
   description: 'Open-source 3D-printable logic puzzles with interactive challenges.',
   head: [
