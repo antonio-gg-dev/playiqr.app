@@ -12,7 +12,7 @@ export class Solver {
   readonly #columns: readonly number[]
   readonly #rowsByColumn: readonly (readonly Placement[])[]
 
-  constructor(blockedCellIds: readonly number[]) {
+  public constructor(blockedCellIds: readonly number[]) {
     const board = new Board()
 
     if (
@@ -51,11 +51,11 @@ export class Solver {
     Object.freeze(this)
   }
 
-  hasSolution(): boolean {
+  public hasSolution(): boolean {
     return this.search(1) === 1
   }
 
-  findSolutions(limit?: number): readonly (readonly Placement[])[] {
+  public findSolutions(limit?: number): readonly (readonly Placement[])[] {
     const solutions: (readonly Placement[])[] = []
 
     this.search(limit, (placements) => {
@@ -71,7 +71,7 @@ export class Solver {
     return Object.freeze(solutions)
   }
 
-  countSolutions(limit?: number): number {
+  public countSolutions(limit?: number): number {
     return this.search(limit)
   }
 

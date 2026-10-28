@@ -7,7 +7,7 @@ export class BoardSymmetry {
 
   readonly #maps: readonly (readonly number[])[]
 
-  constructor() {
+  public constructor() {
     const board = new Board()
     const maps: (readonly number[])[] = []
 
@@ -39,7 +39,7 @@ export class BoardSymmetry {
     Object.freeze(this)
   }
 
-  equivalents(blockedCellIds: readonly number[]): readonly (readonly number[])[] {
+  public equivalents(blockedCellIds: readonly number[]): readonly (readonly number[])[] {
     if (
       blockedCellIds.length !== BoardSymmetry.OBSTACLE_COUNT ||
       new Set(blockedCellIds).size !== BoardSymmetry.OBSTACLE_COUNT ||

@@ -8,7 +8,7 @@ export class DifficultyRanking {
 
   readonly #ranked: readonly Profile[]
 
-  constructor(profiles: readonly Profile[]) {
+  public constructor(profiles: readonly Profile[]) {
     const keys = profiles.map((profile) => profile.blockedCellIds.join(','))
     if (new Set(keys).size !== keys.length) {
       throw new RangeError('Difficulty profiles must represent distinct challenges')
@@ -32,11 +32,11 @@ export class DifficultyRanking {
     Object.freeze(this)
   }
 
-  ranked(): readonly Profile[] {
+  public ranked(): readonly Profile[] {
     return this.#ranked
   }
 
-  baselineRanked(): readonly Profile[] {
+  public baselineRanked(): readonly Profile[] {
     return Object.freeze(
       [...this.#ranked].sort(
         (left, right) =>
@@ -47,7 +47,7 @@ export class DifficultyRanking {
     )
   }
 
-  candidates(): readonly Profile[] {
+  public candidates(): readonly Profile[] {
     const required = DifficultyRanking.EXTREME_COUNT * 2 + DifficultyRanking.MATCHED_PAIR_COUNT * 2
     if (this.#ranked.length < required) {
       throw new RangeError('At least twelve difficulty profiles are required')

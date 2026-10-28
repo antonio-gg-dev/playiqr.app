@@ -61,7 +61,7 @@ export class DifficultyAnalyzer {
   readonly #solver: Solver
   readonly #optionsCache = new Map<string, StateOptions>()
 
-  constructor(blockedCellIds: readonly number[]) {
+  public constructor(blockedCellIds: readonly number[]) {
     this.#solver = new Solver(blockedCellIds)
     this.#blockedCellIds = Object.freeze([...blockedCellIds].sort((left, right) => left - right))
     this.#blockedMask = DifficultyAnalyzer.cellMask(this.#blockedCellIds)
@@ -69,7 +69,7 @@ export class DifficultyAnalyzer {
     Object.freeze(this)
   }
 
-  analyze(runs = DifficultyAnalyzer.DEFAULT_RUNS) {
+  public analyze(runs = DifficultyAnalyzer.DEFAULT_RUNS) {
     if (!Number.isSafeInteger(runs) || runs <= 0) {
       throw new RangeError('Simulation runs must be a positive safe integer')
     }

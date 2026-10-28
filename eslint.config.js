@@ -26,6 +26,9 @@ export default typescriptEslint.config(
         projectService: true,
       },
     },
+    rules: {
+      '@typescript-eslint/explicit-member-accessibility': 'error',
+    },
   },
 
   ...vue.configs['flat/recommended'],

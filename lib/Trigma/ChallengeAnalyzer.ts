@@ -5,7 +5,7 @@ import { Solver } from '@/lib/Trigma/Solver'
 export class ChallengeAnalyzer {
   readonly #symmetry = new BoardSymmetry()
 
-  analyze(blockedConfigurations: readonly (readonly number[])[] = this.representatives()) {
+  public analyze(blockedConfigurations: readonly (readonly number[])[] = this.representatives()) {
     const groupsByCanonical = new Map<string, ReturnType<ChallengeAnalyzer['analyzeConfiguration']>>()
 
     for (const blockedCellIds of blockedConfigurations) {
@@ -57,7 +57,7 @@ export class ChallengeAnalyzer {
     })
   }
 
-  analyzeConfiguration(blockedCellIds: readonly number[]) {
+  public analyzeConfiguration(blockedCellIds: readonly number[]) {
     const equivalents = this.#symmetry.equivalents(blockedCellIds)
     const canonical = equivalents[0]
 
@@ -68,7 +68,7 @@ export class ChallengeAnalyzer {
     })
   }
 
-  representatives(): readonly (readonly number[])[] {
+  public representatives(): readonly (readonly number[])[] {
     const cellCount = new Board().cells.length
     const representatives: (readonly number[])[] = []
 
