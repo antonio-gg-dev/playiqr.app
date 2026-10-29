@@ -6,7 +6,7 @@ import { Preferences } from '@/lib/Shared/Preferences/Preferences'
 import { Language } from '@/lib/Shared/Preferences/Language'
 import { ThemeMode } from '@/lib/Shared/Preferences/ThemeMode'
 
-it('updates real global preferences through native controls and keeps return destinations distinct', async () => {
+it('updates real global preferences through custom controls and keeps return destinations distinct', async () => {
   const preferences = new Preferences()
   const i18n = createLocalization()
 
@@ -21,7 +21,8 @@ it('updates real global preferences through native controls and keeps return des
   ])
   expect(wrapper.get('a').attributes('aria-label')).toBe('Back to menu')
 
-  await wrapper.get('select#language').setValue(Language.Spanish)
+  await wrapper.get('#language-trigger').trigger('click')
+  await wrapper.get(`[role="option"][data-value="${Language.Spanish}"]`).trigger('click')
 
   expect(preferences.language).toBe(Language.Spanish)
 
@@ -31,7 +32,28 @@ it('updates real global preferences through native controls and keeps return des
 
   expect(wrapper.get('a').attributes('aria-label')).toBe('Volver al menú')
 
-  await wrapper.get('select#theme').setValue(ThemeMode.Dark)
+  await wrapper.get('#theme-trigger').trigger('click')
+  await wrapper.get(`[role="option"][data-value="${ThemeMode.Dark}"]`).trigger('click')
 
   expect(preferences.theme).toBe(ThemeMode.Dark)
+})
+
+it('shows each locale name from its own catalog', async () => {
+  const i18n = createLocalization()
+  const preferences = new Preferences()
+
+  i18n.global.mergeLocaleMessage(Language.English, {
+    english: 'English translation',
+    spanish: 'Spanish translation',
+  })
+
+  const wrapper = mount(TrigmaOptions, {
+    global: { plugins: [i18n] },
+    props: { preferences },
+  })
+
+  await wrapper.get('#language-trigger').trigger('click')
+
+  expect(wrapper.get(`[role="option"][data-value="${Language.English}"]`).text()).toBe('English')
+  expect(wrapper.get(`[role="option"][data-value="${Language.Spanish}"]`).text()).toBe('Español')
 })
