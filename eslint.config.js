@@ -91,4 +91,18 @@ export default typescriptEslint.config(
       ],
     },
   },
+
+  {
+    files: ['**/*.stories.ts'],
+    rules: {
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'variable',
+          modifiers: ['exported'],
+          format: ['snake_case'],
+        },
+      ],
+    },
+  },
 )

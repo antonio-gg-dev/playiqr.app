@@ -7,7 +7,7 @@ export default { component: TrigmaMenu } satisfies Meta<typeof TrigmaMenu>
 
 export const english: StoryObj<typeof TrigmaMenu> = {}
 
-export const spanishDark: StoryObj<typeof TrigmaMenu> = {
+export const spanish_dark: StoryObj<typeof TrigmaMenu> = {
   globals: {
     theme: ThemeMode.Dark,
     language: Language.Spanish,

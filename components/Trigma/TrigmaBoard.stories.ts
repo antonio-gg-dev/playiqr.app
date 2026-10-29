@@ -15,7 +15,7 @@ export default {
 
 export const example: StoryObj<typeof TrigmaBoard> = {}
 
-export const otherChallenge: StoryObj<typeof TrigmaBoard> = {
+export const other_challenge: StoryObj<typeof TrigmaBoard> = {
   args: {
     blockedCellIds: [
       35,

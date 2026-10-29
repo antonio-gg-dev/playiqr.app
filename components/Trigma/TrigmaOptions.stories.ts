@@ -38,7 +38,7 @@ export default {
 
 export const english: StoryObj<typeof TrigmaOptions> = {}
 
-export const spanishDark: StoryObj<typeof TrigmaOptions> = {
+export const spanish_dark: StoryObj<typeof TrigmaOptions> = {
   globals: {
     theme: ThemeMode.Dark,
     language: Language.Spanish,
