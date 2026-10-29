@@ -9,8 +9,7 @@
   "light": "Claro",
   "dark": "Oscuro",
   "language": "Idioma",
-  "spanish": "Español",
-  "english": "English",
+  "locale": "Español",
   "invalidBlockers": "El parámetro b debe contener cuatro IDs distintos del 0 al {lastCellId} separados por comas.",
   "boardDescription": "Tablero de Trigma. Bloqueadores: {blockers}"
 }

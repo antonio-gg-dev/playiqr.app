@@ -6,8 +6,10 @@ import { Preferences } from '@/lib/Shared/Preferences/Preferences'
 test('changes and persists global preferences without changing the options URL', async ({ page }) => {
   await page.goto('/trigma/options')
 
-  await page.getByLabel('Theme', { exact: true }).selectOption(ThemeMode.Dark)
-  await page.getByLabel('Language', { exact: true }).selectOption(Language.Spanish)
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await page.getByRole('option', { name: 'Dark' }).click()
+  await page.getByRole('combobox', { name: 'Language' }).click()
+  await page.getByRole('option', { name: 'Español' }).click()
 
   await expect(page).toHaveURL(/\/trigma\/options$/)
   await expect(page.locator('html')).toHaveAttribute('lang', Language.Spanish)
@@ -20,8 +22,8 @@ test('changes and persists global preferences without changing the options URL',
 
   await page.reload()
 
-  await expect(page.getByLabel('Tema', { exact: true })).toHaveValue(ThemeMode.Dark)
-  await expect(page.getByLabel('Idioma', { exact: true })).toHaveValue(Language.Spanish)
+  await expect(page.locator('select#theme')).toHaveValue(ThemeMode.Dark)
+  await expect(page.locator('select#language')).toHaveValue(Language.Spanish)
 })
 
 test('follows live system appearance only while automatic is selected', async ({ page }) => {
@@ -29,7 +31,7 @@ test('follows live system appearance only while automatic is selected', async ({
 
   await page.goto('/trigma/options')
 
-  await expect(page.getByLabel('Theme', { exact: true })).toHaveValue(ThemeMode.Auto)
+  await expect(page.locator('select#theme')).toHaveValue(ThemeMode.Auto)
 
   await page.evaluate(async () => {
     await document.fonts.ready
@@ -41,7 +43,8 @@ test('follows live system appearance only while automatic is selected', async ({
 
   await expect(page).toHaveScreenshot('automatic-dark.png')
 
-  await page.getByLabel('Theme', { exact: true }).selectOption(ThemeMode.Light)
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await page.getByRole('option', { name: 'Light' }).click()
 
   await expect(page).toHaveScreenshot('manual-light.png')
 
@@ -49,6 +52,31 @@ test('follows live system appearance only while automatic is selected', async ({
   await page.emulateMedia({ colorScheme: 'dark' })
 
   await expect(page).toHaveScreenshot('manual-light.png')
+
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+
+  await expect(page).toHaveScreenshot('theme-dropdown-open.png')
+})
+
+test('shows mouse hover feedback on the theme trigger and options', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' })
+
+  await page.goto('/trigma/options')
+
+  const trigger = page.getByRole('combobox', { name: 'Theme' })
+
+  await trigger.waitFor({ state: 'visible' })
+  await page.evaluate(async () => {
+    await document.fonts.ready
+  })
+  await trigger.hover()
+
+  await expect(page).toHaveScreenshot('theme-trigger-hover-dark.png')
+
+  await trigger.click()
+  await page.getByRole('option', { name: 'Light' }).hover()
+
+  await expect(page).toHaveScreenshot('theme-option-hover-dark.png')
 })
 
 test('detects the browser language and falls back to English', async ({ browser }) => {
