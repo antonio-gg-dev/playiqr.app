@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test'
 import { Language } from '@/lib/Shared/Preferences/Language'
 import { ThemeMode } from '@/lib/Shared/Preferences/ThemeMode'
 import { Preferences } from '@/lib/Shared/Preferences/Preferences'
+import { CampaignProgress } from '@/lib/Trigma/CampaignProgress'
 
 test.use({ locale: 'es-ES' })
 
@@ -95,6 +96,27 @@ test('explains invalid blocker parameters', async ({ page }) => {
   })
 
   await expect(page).toHaveScreenshot('invalid-trigma-query.png')
+})
+
+test('shows real campaign progress in the menu while the daily challenge remains disabled', async ({ page }) => {
+  await page.addInitScript((key) => {
+    localStorage.setItem(
+      key,
+      JSON.stringify([
+        1,
+        2,
+        3,
+      ]),
+    )
+  }, CampaignProgress.STORAGE_KEY)
+  await page.goto('/trigma')
+
+  const levels = page.getByRole('link', { name: /Niveles/ })
+
+  await expect(levels).toHaveAttribute('href', '/trigma/levels')
+  await expect(levels).toContainText('3/100')
+  await expect(page.getByRole('progressbar', { name: 'Progreso de campaña' })).toHaveAttribute('aria-valuenow', '3')
+  await expect(page.getByRole('button', { name: 'Reto diario' })).toBeDisabled()
 })
 
 for (const language of Object.values(Language)) {

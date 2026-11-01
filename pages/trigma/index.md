@@ -1,14 +1,25 @@
-<TrigmaMenu v-if="blockedCellIds === undefined" />
-<TrigmaPreview v-else :blocked-cell-ids="blockedCellIds" :last-cell-id="boardCellCount - 1" />
+<TrigmaMenu
+  v-if="blockedCellIds === undefined"
+  :campaign-progress="campaignProgress"
+/>
+
+<TrigmaPreview
+  v-else
+  :blocked-cell-ids="blockedCellIds"
+  :last-cell-id="boardCellCount - 1"
+/>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vitepress'
 import TrigmaMenu from '@/components/Trigma/TrigmaMenu.vue'
 import TrigmaPreview from '@/components/Trigma/TrigmaPreview.vue'
+import { use } from '@/components/Shared/use'
 import { Board } from '@/lib/Trigma/Board'
+import { CampaignProgress } from '@/lib/Trigma/CampaignProgress'
 
 const router = useRouter()
+const campaignProgress = use(CampaignProgress.KEY)
 
 const BLOCKED_CELL_COUNT = 4
 const boardCellCount = new Board().cells.length
