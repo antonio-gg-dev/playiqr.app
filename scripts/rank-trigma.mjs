@@ -21,6 +21,7 @@ registerHooks({
 const { Board } = await import('../lib/Trigma/Board.ts')
 const { DifficultyAnalyzer } = await import('../lib/Trigma/DifficultyAnalyzer.ts')
 const { DifficultyRanking } = await import('../lib/Trigma/DifficultyRanking.ts')
+const { CampaignCatalog } = await import('../lib/Trigma/CampaignCatalog.ts')
 const sampleChallenges = [
   [
     4,
@@ -135,6 +136,8 @@ if (!process.argv.includes('--sample-only')) {
 
   const reportPath = resolve(projectRoot, 'trigma-difficulty.json')
   const blindPath = resolve(projectRoot, 'trigma-blind-trial.json')
+  const campaignCatalogPath = resolve(projectRoot, 'lib/Trigma/campaign-catalog-v1.json')
+  const campaignCatalog = CampaignCatalog.fromRanking(ranking)
 
   await writeFile(
     reportPath,
@@ -152,7 +155,9 @@ if (!process.argv.includes('--sample-only')) {
     )}\n`,
   )
   await writeFile(blindPath, `${JSON.stringify(blind, null, 2)}\n`)
+  await writeFile(campaignCatalogPath, `${JSON.stringify(campaignCatalog.toJSON(), null, 2)}\n`)
   log(`Difficulty analysis: ${(performance.now() - started).toFixed(0)} ms`)
   log(`Difficulty report: ${reportPath}`)
   log(`Blind trial: ${blindPath}`)
+  log(`Campaign catalog: ${campaignCatalogPath}`)
 }

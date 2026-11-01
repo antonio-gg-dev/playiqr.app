@@ -1,0 +1,1017 @@
+{
+  "version": 1,
+  "rankedChallengeCount": 4180,
+  "remainingCanonicalChallengeCount": 4080,
+  "selection": {
+    "difficultyOrder": "medianBacktracks, percentile90Backtracks, trapRate, medianDiscretionaryChoices, blockedCellIds",
+    "groups": 5,
+    "levelsPerGroup": 20,
+    "edgeMargin": 0.1,
+    "forcedExtremes": [
+      1,
+      4180
+    ]
+  },
+  "levels": [
+    {
+      "level": 1,
+      "blockedCellIds": [
+        0,
+        4,
+        6,
+        8
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 2,
+      "blockedCellIds": [
+        4,
+        6,
+        12,
+        17
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 3,
+      "blockedCellIds": [
+        1,
+        5,
+        24,
+        31
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 4,
+      "blockedCellIds": [
+        4,
+        5,
+        15,
+        20
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 5,
+      "blockedCellIds": [
+        1,
+        8,
+        14,
+        19
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 6,
+      "blockedCellIds": [
+        1,
+        11,
+        23,
+        30
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 7,
+      "blockedCellIds": [
+        4,
+        13,
+        21,
+        23
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 8,
+      "blockedCellIds": [
+        1,
+        14,
+        15,
+        21
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 9,
+      "blockedCellIds": [
+        0,
+        5,
+        15,
+        17
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 10,
+      "blockedCellIds": [
+        4,
+        5,
+        21,
+        22
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 11,
+      "blockedCellIds": [
+        0,
+        10,
+        12,
+        35
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 12,
+      "blockedCellIds": [
+        0,
+        10,
+        29,
+        30
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 13,
+      "blockedCellIds": [
+        0,
+        4,
+        15,
+        24
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 14,
+      "blockedCellIds": [
+        4,
+        12,
+        15,
+        21
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 15,
+      "blockedCellIds": [
+        1,
+        6,
+        15,
+        17
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 16,
+      "blockedCellIds": [
+        1,
+        9,
+        14,
+        17
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 17,
+      "blockedCellIds": [
+        0,
+        10,
+        30,
+        31
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 18,
+      "blockedCellIds": [
+        0,
+        9,
+        14,
+        32
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 19,
+      "blockedCellIds": [
+        4,
+        10,
+        18,
+        23
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 20,
+      "blockedCellIds": [
+        1,
+        8,
+        14,
+        20
+      ],
+      "difficulty": "initiate"
+    },
+    {
+      "level": 21,
+      "blockedCellIds": [
+        0,
+        5,
+        9,
+        24
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 22,
+      "blockedCellIds": [
+        1,
+        5,
+        27,
+        31
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 23,
+      "blockedCellIds": [
+        1,
+        13,
+        18,
+        31
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 24,
+      "blockedCellIds": [
+        1,
+        8,
+        10,
+        19
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 25,
+      "blockedCellIds": [
+        0,
+        10,
+        16,
+        32
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 26,
+      "blockedCellIds": [
+        0,
+        6,
+        11,
+        29
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 27,
+      "blockedCellIds": [
+        1,
+        6,
+        15,
+        16
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 28,
+      "blockedCellIds": [
+        1,
+        11,
+        13,
+        31
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 29,
+      "blockedCellIds": [
+        1,
+        17,
+        22,
+        28
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 30,
+      "blockedCellIds": [
+        1,
+        8,
+        19,
+        32
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 31,
+      "blockedCellIds": [
+        4,
+        12,
+        18,
+        20
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 32,
+      "blockedCellIds": [
+        0,
+        5,
+        15,
+        23
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 33,
+      "blockedCellIds": [
+        1,
+        4,
+        17,
+        31
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 34,
+      "blockedCellIds": [
+        4,
+        12,
+        18,
+        32
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 35,
+      "blockedCellIds": [
+        4,
+        11,
+        12,
+        20
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 36,
+      "blockedCellIds": [
+        0,
+        11,
+        12,
+        30
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 37,
+      "blockedCellIds": [
+        0,
+        4,
+        14,
+        31
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 38,
+      "blockedCellIds": [
+        0,
+        17,
+        32,
+        33
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 39,
+      "blockedCellIds": [
+        0,
+        2,
+        11,
+        27
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 40,
+      "blockedCellIds": [
+        0,
+        9,
+        12,
+        13
+      ],
+      "difficulty": "apprentice"
+    },
+    {
+      "level": 41,
+      "blockedCellIds": [
+        0,
+        4,
+        24,
+        29
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 42,
+      "blockedCellIds": [
+        1,
+        4,
+        5,
+        31
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 43,
+      "blockedCellIds": [
+        0,
+        4,
+        8,
+        9
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 44,
+      "blockedCellIds": [
+        0,
+        4,
+        17,
+        21
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 45,
+      "blockedCellIds": [
+        0,
+        9,
+        15,
+        27
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 46,
+      "blockedCellIds": [
+        1,
+        4,
+        10,
+        29
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 47,
+      "blockedCellIds": [
+        1,
+        10,
+        15,
+        20
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 48,
+      "blockedCellIds": [
+        0,
+        4,
+        19,
+        33
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 49,
+      "blockedCellIds": [
+        1,
+        5,
+        20,
+        24
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 50,
+      "blockedCellIds": [
+        1,
+        8,
+        23,
+        32
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 51,
+      "blockedCellIds": [
+        1,
+        9,
+        11,
+        33
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 52,
+      "blockedCellIds": [
+        0,
+        4,
+        7,
+        27
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 53,
+      "blockedCellIds": [
+        4,
+        8,
+        18,
+        22
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 54,
+      "blockedCellIds": [
+        0,
+        27,
+        28,
+        29
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 55,
+      "blockedCellIds": [
+        0,
+        11,
+        12,
+        27
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 56,
+      "blockedCellIds": [
+        0,
+        9,
+        23,
+        32
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 57,
+      "blockedCellIds": [
+        4,
+        11,
+        19,
+        31
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 58,
+      "blockedCellIds": [
+        1,
+        19,
+        30,
+        31
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 59,
+      "blockedCellIds": [
+        0,
+        12,
+        27,
+        29
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 60,
+      "blockedCellIds": [
+        0,
+        1,
+        10,
+        20
+      ],
+      "difficulty": "adept"
+    },
+    {
+      "level": 61,
+      "blockedCellIds": [
+        0,
+        4,
+        15,
+        30
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 62,
+      "blockedCellIds": [
+        1,
+        5,
+        30,
+        33
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 63,
+      "blockedCellIds": [
+        1,
+        11,
+        15,
+        19
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 64,
+      "blockedCellIds": [
+        0,
+        4,
+        15,
+        20
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 65,
+      "blockedCellIds": [
+        1,
+        12,
+        17,
+        33
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 66,
+      "blockedCellIds": [
+        1,
+        8,
+        27,
+        32
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 67,
+      "blockedCellIds": [
+        1,
+        11,
+        19,
+        24
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 68,
+      "blockedCellIds": [
+        0,
+        1,
+        4,
+        29
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 69,
+      "blockedCellIds": [
+        4,
+        8,
+        19,
+        30
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 70,
+      "blockedCellIds": [
+        0,
+        1,
+        10,
+        29
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 71,
+      "blockedCellIds": [
+        1,
+        11,
+        19,
+        29
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 72,
+      "blockedCellIds": [
+        0,
+        2,
+        9,
+        18
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 73,
+      "blockedCellIds": [
+        1,
+        5,
+        13,
+        20
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 74,
+      "blockedCellIds": [
+        0,
+        9,
+        14,
+        31
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 75,
+      "blockedCellIds": [
+        4,
+        11,
+        18,
+        19
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 76,
+      "blockedCellIds": [
+        1,
+        5,
+        22,
+        31
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 77,
+      "blockedCellIds": [
+        1,
+        10,
+        19,
+        31
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 78,
+      "blockedCellIds": [
+        0,
+        6,
+        25,
+        30
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 79,
+      "blockedCellIds": [
+        0,
+        4,
+        21,
+        28
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 80,
+      "blockedCellIds": [
+        0,
+        1,
+        6,
+        23
+      ],
+      "difficulty": "master"
+    },
+    {
+      "level": 81,
+      "blockedCellIds": [
+        1,
+        5,
+        14,
+        29
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 82,
+      "blockedCellIds": [
+        0,
+        1,
+        20,
+        24
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 83,
+      "blockedCellIds": [
+        0,
+        18,
+        20,
+        32
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 84,
+      "blockedCellIds": [
+        0,
+        11,
+        12,
+        31
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 85,
+      "blockedCellIds": [
+        0,
+        2,
+        12,
+        16
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 86,
+      "blockedCellIds": [
+        1,
+        4,
+        5,
+        30
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 87,
+      "blockedCellIds": [
+        1,
+        9,
+        17,
+        23
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 88,
+      "blockedCellIds": [
+        0,
+        4,
+        8,
+        16
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 89,
+      "blockedCellIds": [
+        0,
+        4,
+        25,
+        35
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 90,
+      "blockedCellIds": [
+        4,
+        5,
+        19,
+        29
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 91,
+      "blockedCellIds": [
+        1,
+        9,
+        11,
+        15
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 92,
+      "blockedCellIds": [
+        0,
+        4,
+        11,
+        28
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 93,
+      "blockedCellIds": [
+        0,
+        11,
+        18,
+        21
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 94,
+      "blockedCellIds": [
+        0,
+        19,
+        28,
+        31
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 95,
+      "blockedCellIds": [
+        0,
+        4,
+        16,
+        18
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 96,
+      "blockedCellIds": [
+        4,
+        11,
+        13,
+        14
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 97,
+      "blockedCellIds": [
+        0,
+        11,
+        21,
+        28
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 98,
+      "blockedCellIds": [
+        0,
+        1,
+        5,
+        27
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 99,
+      "blockedCellIds": [
+        0,
+        1,
+        13,
+        16
+      ],
+      "difficulty": "virtuoso"
+    },
+    {
+      "level": 100,
+      "blockedCellIds": [
+        0,
+        2,
+        9,
+        10
+      ],
+      "difficulty": "virtuoso"
+    }
+  ]
+}
