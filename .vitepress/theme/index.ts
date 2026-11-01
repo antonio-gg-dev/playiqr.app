@@ -5,6 +5,7 @@ import { useRouter, inBrowser } from 'vitepress'
 import { defineComponent, h } from 'vue'
 import { Preferences } from '@/lib/Shared/Preferences/Preferences'
 import { Language } from '@/lib/Shared/Preferences/Language'
+import { CampaignProgress } from '@/lib/Trigma/CampaignProgress'
 import { use } from '@/components/Shared/use'
 import { createLocalization } from '@/i18n.config'
 import '@/styles/index.scss'
@@ -13,6 +14,7 @@ const Layout = defineComponent({
   data() {
     return {
       preferences: use(Preferences.KEY),
+      campaignProgress: use(CampaignProgress.KEY),
       router: useRouter(),
     }
   },
@@ -28,6 +30,10 @@ const Layout = defineComponent({
   },
 
   created() {
+    if (inBrowser) {
+      this.campaignProgress.initialize(window)
+    }
+
     this.$watch(
       () => [
         this.router.route.path,
@@ -49,6 +55,7 @@ const Layout = defineComponent({
 
   unmounted() {
     this.preferences.dispose()
+    this.campaignProgress.dispose()
   },
 
   render() {
@@ -61,6 +68,7 @@ export default {
 
   enhanceApp({ app }) {
     app.provide(Preferences.KEY, new Preferences())
+    app.provide(CampaignProgress.KEY, new CampaignProgress())
     app.use(createLocalization())
   },
 } satisfies Theme

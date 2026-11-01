@@ -2,13 +2,26 @@
   <PageHeader title="IQR Trigma" />
 
   <main class="trigma-menu__content">
-    <button
+    <a
       class="trigma-menu__mode"
-      type="button"
-      disabled
+      href="/trigma/levels"
     >
-      {{ $t('levels') }}
-    </button>
+      <span class="trigma-menu__mode-title">{{ $t('levels') }}</span>
+      <span class="trigma-menu__mode-progress">{{ campaignProgress.completedCount }}/100</span>
+      <span
+        class="trigma-menu__progress"
+        role="progressbar"
+        :aria-label="$t('campaignProgress')"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        :aria-valuenow="campaignProgress.completedCount"
+      >
+        <span
+          class="trigma-menu__progress-indicator"
+          :style="{ width: `${campaignProgress.completedCount}%` }"
+        />
+      </span>
+    </a>
 
     <button
       class="trigma-menu__mode"
@@ -34,11 +47,20 @@
 import { defineComponent } from 'vue'
 import PageHeader from '@/components/Shared/Layout/PageHeader.vue'
 import OptionsIcon from '@/components/Shared/Icons/OptionsIcon.vue'
+import type { PropType } from 'vue'
+import { CampaignProgress } from '@/lib/Trigma/CampaignProgress'
 
 export default defineComponent({
   components: {
     PageHeader,
     OptionsIcon,
+  },
+
+  props: {
+    campaignProgress: {
+      type: Object as PropType<CampaignProgress>,
+      required: true,
+    },
   },
 })
 </script>
@@ -50,15 +72,39 @@ export default defineComponent({
   }
 
   &__mode {
-    @apply min-h-28 rounded-xl border border-gray-300 bg-gray-100 p-6 font-heading text-xl font-medium text-gray-500;
+    @apply flex min-h-28 flex-col gap-3 rounded-xl border border-gray-300 bg-gray-100 p-6 font-heading text-xl font-medium text-gray-500;
 
     &:disabled {
       @apply cursor-not-allowed;
     }
 
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-blue-600;
+    }
+
     @include dark {
       @apply border-gray-700 bg-gray-900 text-gray-400;
     }
+  }
+
+  &__mode-title {
+    @apply self-start;
+  }
+
+  &__mode-progress {
+    @apply self-start font-sans text-sm font-normal;
+  }
+
+  &__progress {
+    @apply h-2 w-full overflow-hidden rounded-full bg-gray-300;
+
+    @include dark {
+      @apply bg-gray-700;
+    }
+  }
+
+  &__progress-indicator {
+    @apply block h-full rounded-full bg-blue-600;
   }
 
   &__options {
